@@ -36,3 +36,7 @@ Route::get('/eventospersonales', function () {
 Route::get('/informacion', function () {
     return view('informacion');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

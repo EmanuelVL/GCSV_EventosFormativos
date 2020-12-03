@@ -1,62 +1,70 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layout.layout')
+@section('content')  
 
-        <title>Sistema de Eventos Formativos</title>
+<title> Inicio </title>
+    <div class="container">
+        <div class="card border-0 shadow my-3">
+            <div class="card-body" >
+                <div class="container">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-        <link href="{{ URL::asset('/css/style.css') }}" rel="stylesheet">
-
-    </head>
-    <body>
-        <div class="cuadrologin">
-            <a href="registro">Login</a>
-        </div>
-        <div class="topnav">
-             <img src="{{ URL::asset('img/logo-institucional.jpg') }}" height="150" width="150" alt="logo">
-             <div class="anclas">
-                 <a class="active" href="home">Principal</a>
-                 <a href="eventos">Eventos Formativos</a>
-                 <a href="eventospersonales">Tus Eventos</a>
-                 <a href="informacion">Información</a>
-             </div>
-        </div>
-<!--
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+                    <!-- Page Heading -->
+                    <div class="card-header border-0">
+                <h3 class="card-title">Eventos formativos proximos</h3>
+                <div class="card-tools">
+                  
                 </div>
-            @endif
+              </div>
+               
+                    <!-- Page Heading -->
+                  
+                       
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Bienvenido
-                </div>
+                            <div class="card card-primary card-outline" style="text-align: center; opacity:1;">
+                      <div class="card-header">
+                        <h5 class="m-0">Evento formativo ejemplo: </h5>
+                      </div>
+                      <div class="card-body">
+                        <p class="card-text"></p>
+                        <a href="" class="btn btn-primary">Ver más</a>
+                        <a href="" class="btn btn-primary">Inscribirse</a>
+                      </div>
+                    </div>
+                                
+                              
+                   
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                          
+                    
+                    
+
+                                      <div class="card card-primary card-outline" style="text-align: center; opacity:1;">
+                      <div class="card-header">
+                        <h5 class="m-0">Otro evento</h5>
+                      </div>
+                      <div class="card-body">
+                        <p class="card-text"></p>
+                        <a href="" class="btn btn-primary">Ver más</a>
+                        <a href="" class="btn btn-primary">Inscribirse</a>
+                      </div>
+                    </div>
+                          
+                         
+
+
+                  
+                    
+                    <!-- /.row -->
+
+
                 </div>
+                <!-- /.container -->
             </div>
         </div>
-    -->
+        <div style="height: 100px"></div>
+            <p class="lead mb-0"></p>
+        </div>
+    </div>
     </body>
 </html>
+@endsection
