@@ -40,3 +40,7 @@ Route::get('/informacion', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/gestioneventos', function () {
+    return view('gestioneventos');
+});

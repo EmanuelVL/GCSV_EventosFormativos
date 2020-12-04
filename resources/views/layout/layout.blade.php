@@ -42,7 +42,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <a href="/" class="nav-link">Inicio</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="" class="nav-link">Administrar eventos</a>
+        <a href="/gestioneventos" class="nav-link">Administrar eventos</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="" class="nav-link">Todos los eventos</a>
@@ -101,7 +101,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-               
+
           <li class="nav-item ">
             <a href="/categorias" class="nav-link ">
               <i class="far fa-circle nav-icon"></i>
@@ -126,7 +126,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>Notificaciones  </p>
                 </a>
               </li>
-      
+
               <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
