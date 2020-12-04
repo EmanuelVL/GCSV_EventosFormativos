@@ -15,13 +15,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
   <!-- pace-progress -->
-  <link rel="stylesheet" href="/ev/public/adminlte/plugins/pace-progress/themes/black/pace-theme-flat-top.css">
+  <link rel="stylesheet" href="/adminlte/plugins/pace-progress/themes/black/pace-theme-flat-top.css">
 
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="/ev/public/adminlte/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="/adminlte/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="/ev/public/adminlte/css/adminlte.min.css">
+  <link rel="stylesheet" href="/adminlte/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
@@ -78,7 +78,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
-      <img src="/ev/public/adminlte/img/logo.png" alt="Unison logo" class="brand-image img-circle elevation-3"
+      <img src="/adminlte/img/logo.png" alt="Unison logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light"> .</span>
     </a>
@@ -88,7 +88,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="/ev/public/adminlte/img/user.png" class="img-circle elevation-2" alt="User Image">
+          <img src="/adminlte/img/user.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="login/" class="d-block"> Iniciar sesión  </a>
@@ -190,14 +190,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-<script src="/ev/public/adminlte/plugins/jquery/jquery.min.js"></script>
+<script src="/adminlte/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="/ev/public/adminlte/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/adminlte/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="/ev/public/adminlte/js/adminlte.min.js"></script>
+<script src="/adminlte/js/adminlte.min.js"></script>
 
- <script type="text/javascript" src="/ev/public/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/ev/public/js/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="/ev/public/js/bootstrap.bundle.js"></script>
+ <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
 </body>
 </html>
