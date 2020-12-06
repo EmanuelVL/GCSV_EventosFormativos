@@ -1,23 +1,115 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Eventos Formativos</title>
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-        <link href="{{ URL::asset('/css/style.css') }}" rel="stylesheet">
-    </head>
-    <body>
-        <div class="cuadrologin">
-            <a href="registro">Login</a>
-        </div>
-        <div class="topnav">
-            <img src="{{ URL::asset('img/logo-institucional.jpg') }}" height="150" width="150" alt="logo">
-            <div class="anclas">
-                <a href="home">Principal</a>
-                <a class="active" href="eventos">Eventos Formativos</a>
-                <a href="eventospersonales">Tus Eventos</a>
-                <a href="informacion">Información</a>
+@extends('layout.layout')
+
+@section('content')
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<style>
+    .center-column {
+        display: block;
+        margin: auto;
+    }
+</style>
+<title>Administrar eventos</title>
+     <!-- Page Content -->
+
+
+<div class="card" align="center">
+              <div class="card-header border-0">
+                <h3 class="card-title">Lista de eventos:</h3>
+                <div class="card-tools">
+
+                </div>
+              </div>
+              <div class="card-body table-responsive p-0">
+                <table class="table table-striped table-valign-middle">
+                  <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+
+                  </tr>
+                  </thead>
+                  <tbody>
+
+        @foreach ($EventoFormativo as $evento)
+
+                <tr>
+
+                    <td>
+                       
+                                <a style="color:blue !important;" href="{}">{{$evento->nombreEF}}</a>
+                                 </a>
+                               
+                    </td>
+                <td style="height:10px;"><p class="descripcion-texto">{{$evento->descripcion}}</p></td>
+                <td>
+                       
+                                <a style="color:blue !important;" href="{}">{{$evento->fechaInicio}}</a>
+                                 </a>
+                               
+                </td>
+                    <td style="width:150px">
+                        <div class="d-flex">
+
+                            <div class="col-lg-8 col-md-8 flex-fill">
+                                <center>
+                                
+                                    <a type="button" style="color:white ;" class="btn btn-info btn-sm" href="{{route('gestioneventos.show',$evento->idEF)}}">
+
+                                        Ver evento
+                                    </a>
+                               
+                                </center>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 flex-fill">
+                                <form style="margin: 0px;" action=""  method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <center>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Quiere borrar el evento: {{ $evento->nombreEF }}?')" >
+                                            <span class="fa fa-trash"></span>
+                                        Eliminar
+                                    </button>
+                                    </center>
+                                </form>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 flex-fill">
+                                <center>
+                                <a type="button" style="color:white !important;" class="btn btn-info btn-sm" href="/gestioneventos/{{$evento->idEF}}/edit">
+                                        <span class="fa fa-edit"></span>
+                                    Editar
+                                </a>
+                                </center>
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+
+
+
+
+        @endforeach
+
+
+                  </tbody>
+                </table>
+
             </div>
-        </div>
-    </body>
-</html>
+            <br>
+            <div class="box-footer">
+                <form action="/gestioneventos/create">
+                    {{-- <button type="submit" style="float:right; background-color:grey" class="btn pretty-btn"  type="submit" value="">Crear evento</button> --}}
+                    <input style="float:right; background-color:grey; color:white" class="btn pretty-btn"  type="submit" value="Crear evento" />
+                </form>
+            </div>
+            <br>
+            </div>
+</div>
+
+
+@stop
