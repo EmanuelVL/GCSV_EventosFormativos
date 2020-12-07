@@ -43,3 +43,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::resource('gestioneventos','ControladorEventosFormativos');
+
+Route::match(array('GET', 'POST'),'constancias', function () {
+    return view('constancias');
+});
