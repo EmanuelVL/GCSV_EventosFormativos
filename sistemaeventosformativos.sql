@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 07, 2020 at 05:47 PM
+-- Generation Time: Dec 08, 2020 at 12:33 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
@@ -26,7 +26,7 @@ DELIMITER $$
 -- Procedures
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `autoevalRealizada` (IN `idEF` INT, IN `idUsuario` INT)  NO SQL
-SELECT COUNT(*) FROM autoevaluacion
+SELECT COUNT(*) AS autoeval FROM autoevaluacion
     WHERE autoevaluacion.idEF = idEF
     AND autoevaluacion.idUsuario = idUsuario
     AND autoevaluacion.r1 IS NOT NULL
@@ -36,7 +36,7 @@ SELECT COUNT(*) FROM autoevaluacion
     AND autoevaluacion.r5 IS NOT NULL$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `evaldocRealizada` (IN `idEF` INT, IN `idUsuario` INT)  NO SQL
-SELECT COUNT(*) FROM evaluaciondocente
+SELECT COUNT(*) AS evaldoc FROM evaluaciondocente
     WHERE evaluaciondocente.idEF = idEF
     AND evaluaciondocente.idUsuario = idUsuario
     AND evaluaciondocente.r1 IS NOT NULL
@@ -46,7 +46,7 @@ SELECT COUNT(*) FROM evaluaciondocente
     AND evaluaciondocente.r5 IS NOT NULL$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `evalproRealizada` (IN `idEF` INT, IN `idUsuario` INT)  NO SQL
-SELECT COUNT(*) FROM evaluacionprograma
+SELECT COUNT(*) AS evalpro FROM evaluacionprograma
     WHERE evaluacionprograma.idEF = idEF
     AND evaluacionprograma.idUsuario = idUsuario
     AND evaluacionprograma.r1 IS NOT NULL
@@ -58,8 +58,15 @@ SELECT COUNT(*) FROM evaluacionprograma
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listaEFTerminados` (IN `idUsuario` INT)  NO SQL
 SELECT * FROM eventoformativo INNER JOIN detalleeventoparticipante ON eventoformativo.idEF = detalleeventoparticipante.idEF WHERE detalleeventoparticipante.idUsuario = idUsuario AND eventoformativo.fechaFinal <= DATE(NOW())$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `participanteAprobado` (IN `idEF` INT, IN `idUsuario` INT)  NO SQL
+SELECT aprobado FROM detalleeventoparticipante
+WHERE detalleeventoparticipante.idEF = idEF AND detalleeventoparticipante.idUsuario = idUsuario$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `participantesEvaluados` (IN `idEF` INT)  NO SQL
 SELECT evalParticipantes FROM eventoformativo WHERE eventoformativo.idEF = idEF$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `selectEF` (IN `idEF` INT)  NO SQL
+SELECT eventoformativo.nombreEF, DAY(eventoformativo.fechaInicio) AS diaInicio, MONTH(eventoformativo.fechaInicio) AS mesInicio, DAY(eventoformativo.fechaFinal) AS diaFinal, MONTH(eventoformativo.fechaFinal) AS mesFinal, eventoformativo.duracion FROM eventoformativo WHERE eventoformativo.idEF = idEF$$
 
 DELIMITER ;
 
@@ -78,13 +85,6 @@ CREATE TABLE `autoevaluacion` (
   `r4` text,
   `r5` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `autoevaluacion`
---
-
-INSERT INTO `autoevaluacion` (`idUsuario`, `idEF`, `r1`, `r2`, `r3`, `r4`, `r5`) VALUES
-(1, 1, 'a', 'a', 'a', 'aaaa', 'aaaa');
 
 -- --------------------------------------------------------
 
@@ -109,13 +109,6 @@ CREATE TABLE `detalleeventoparticipante` (
   `aprobado` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `detalleeventoparticipante`
---
-
-INSERT INTO `detalleeventoparticipante` (`idEF`, `idUsuario`, `aprobado`) VALUES
-(1, 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -131,13 +124,6 @@ CREATE TABLE `evaluaciondocente` (
   `r4` text,
   `r5` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `evaluaciondocente`
---
-
-INSERT INTO `evaluaciondocente` (`idUsuario`, `idEF`, `r1`, `r2`, `r3`, `r4`, `r5`) VALUES
-(1, 1, 'asdf', 'asdf', 'asdf', 'asdf', 'asdf');
 
 -- --------------------------------------------------------
 
@@ -155,13 +141,6 @@ CREATE TABLE `evaluacionprograma` (
   `r5` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `evaluacionprograma`
---
-
-INSERT INTO `evaluacionprograma` (`idUsuario`, `idEF`, `r1`, `r2`, `r3`, `r4`, `r5`) VALUES
-(1, 1, 'afd', 'asdf', 'asdf', 'asdf', 'asdf');
-
 -- --------------------------------------------------------
 
 --
@@ -170,7 +149,7 @@ INSERT INTO `evaluacionprograma` (`idUsuario`, `idEF`, `r1`, `r2`, `r3`, `r4`, `
 
 CREATE TABLE `eventoformativo` (
   `idEF` int(11) NOT NULL,
-  `nombreEF` varchar(30) NOT NULL,
+  `nombreEF` varchar(80) NOT NULL,
   `fechaInicio` date NOT NULL,
   `fechaFinal` date NOT NULL,
   `modalidad` varchar(10) NOT NULL,
@@ -187,13 +166,6 @@ CREATE TABLE `eventoformativo` (
   `evalParticipantes` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `eventoformativo`
---
-
-INSERT INTO `eventoformativo` (`idEF`, `nombreEF`, `fechaInicio`, `fechaFinal`, `modalidad`, `idTipo`, `idInstructor`, `idInstancia`, `diseñoInstruccional`, `utilidadOportunidad`, `requisitosParticipacion`, `requisitosAcreditacion`, `condicionesOperativas`, `cuota`, `duracion`, `evalParticipantes`) VALUES
-(1, 'Evento', '2020-12-05', '2020-12-05', 'presencial', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, '0.0', 10, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -209,13 +181,6 @@ CREATE TABLE `instructor` (
   `experiencia` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `instructor`
---
-
-INSERT INTO `instructor` (`idInstructor`, `idUsuario`, `calidadProfesional`, `calidadAcademica`, `curriculumSintetico`, `experiencia`) VALUES
-(1, 2, NULL, NULL, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -224,10 +189,9 @@ INSERT INTO `instructor` (`idInstructor`, `idUsuario`, `calidadProfesional`, `ca
 
 CREATE TABLE `modulo` (
   `idModulo` int(11) NOT NULL,
-  `idCreador` int(11) NOT NULL,
-  `nombreModulo` varchar(30) NOT NULL,
-  `contenidoMod` text,
-  `duracionMod` int(11) NOT NULL
+  `nombreModulo` varchar(60) NOT NULL,
+  `contenidoModulo` text,
+  `duracionModulo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -264,19 +228,10 @@ CREATE TABLE `usuario` (
   `nombreUsuario` varchar(50) NOT NULL,
   `apellidoUsuario` varchar(50) DEFAULT NULL,
   `correo` varchar(50) NOT NULL,
-  `password` varchar(25) NOT NULL,
+  `password` varchar(40) NOT NULL,
   `esInstancia` tinyint(1) NOT NULL DEFAULT '0',
   `esAdmin` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `usuario`
---
-
-INSERT INTO `usuario` (`idUsuario`, `nombreUsuario`, `apellidoUsuario`, `correo`, `password`, `esInstancia`, `esAdmin`) VALUES
-(1, 'Emanuel', 'Vidal', 'ema@vidal.com', '1234', 0, 0),
-(2, 'Claudia', 'Lopez', 'clau@dia.com', '12345', 0, 0),
-(3, 'DCEN', NULL, 'dc@en.com', 'dcen', 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -338,8 +293,7 @@ ALTER TABLE `instructor`
 -- Indexes for table `modulo`
 --
 ALTER TABLE `modulo`
-  ADD PRIMARY KEY (`idModulo`),
-  ADD KEY `FK_Creador` (`idCreador`);
+  ADD PRIMARY KEY (`idModulo`);
 
 --
 -- Indexes for table `tipoevento`
@@ -361,7 +315,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `eventoformativo`
 --
 ALTER TABLE `eventoformativo`
-  MODIFY `idEF` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idEF` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `instructor`
@@ -373,7 +327,7 @@ ALTER TABLE `instructor`
 -- AUTO_INCREMENT for table `modulo`
 --
 ALTER TABLE `modulo`
-  MODIFY `idModulo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idModulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tipoevento`
@@ -439,12 +393,6 @@ ALTER TABLE `eventoformativo`
 --
 ALTER TABLE `instructor`
   ADD CONSTRAINT `instructor_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`);
-
---
--- Constraints for table `modulo`
---
-ALTER TABLE `modulo`
-  ADD CONSTRAINT `FK_Creador` FOREIGN KEY (`idCreador`) REFERENCES `usuario` (`idUsuario`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
