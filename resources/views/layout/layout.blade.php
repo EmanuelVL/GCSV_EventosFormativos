@@ -83,7 +83,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <a href="/" class="brand-link">
       <img src="/adminlte/img/logo.png" alt="Unison logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light"> .</span>
+      <span class="brand-text font-weight-light" style='color:transparent'> .</span>
     </a>
 
     <!-- Sidebar -->
@@ -179,14 +179,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-      Anything you want
-    </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; Doriclub 2019 <a href="http://doriclub.ml">Doriclub.ml</a>.</strong> All rights reserved.
-  </footer>
 </div>
 <!-- ./wrapper -->
 

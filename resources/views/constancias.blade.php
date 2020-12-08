@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 @extends('layout.layout')
 @section('content')
+
+<link href="{{ URL::asset('/css/constancias.css') }}" rel="stylesheet">
+
 <?php
-    require ("C:/laragon/www/SistemaEventosFormativos/database/factories/herramientasEF.php");
+    require ("C:/laragon/www/SistemaEventosFormativos/database/factories/herramientasConstancias.php");
 
     $constancia1 = new Constancia();
     $constancia2 = new Constancia();
     $constancia3 = new Constancia();
     $constancia4 = new Constancia();
     $constancia5 = new Constancia();
+    $constancia6 = new Constancia();
+    $constancia7 = new Constancia();
+    $constancia8 = new Constancia();
 
-    $idUsuario = 1;
+    $idUsuario = 1; // Sesión
 
     $listaEFTerminados = $constancia1->listaEventosTerminados($idUsuario);
 
@@ -30,70 +36,185 @@
 
         $evaldocente = $constancia5->evaluaciondocenteRealizada($idEF, $idUsuario);
         $evaldocente = $evaldocente[0];
+
+        $aprobado = $constancia6->participanteAprobado($idEF, $idUsuario);
+        $aprobado = $aprobado[0];
+
+        $usuario = $constancia7->selectUsuario($idUsuario);
+        $usuario = $usuario[0];
+
+        $EF = $constancia8->selectEF($idEF);
+        $EF = $EF[0];
+
+        switch ($EF['mesInicio']) {
+            case 1:
+                $mesInicio = 'Enero';
+                break;
+            case 2:
+                $mesInicio = 'Febrero';
+                break;
+            case 3:
+                $mesInicio = "Marzo";
+                break;
+            case 4:
+                $mesInicio = "Abril";
+                break;
+            case 5:
+                $mesInicio = "Mayo";
+                break;
+            case 6:
+                $mesInicio = "Junio";
+                break;
+            case 7:
+                $mesInicio = "Julio";
+                break;
+            case 8:
+                $mesInicio = "Agosto";
+                break;
+            case 9:
+                $mesInicio = "Septiembre";
+                break;
+            case 10:
+                $mesInicio = "Octubre";
+                break;
+            case 11:
+                $mesInicio = "Noviembre";
+                break;
+            case 12:
+                $mesInicio = "Diciembre";
+                break;
+        }
+
+        switch ($EF['mesFinal']) {
+            case 1:
+                $mesFinal = 'Enero';
+                break;
+            case 2:
+                $mesFinal = 'Febrero';
+                break;
+            case 3:
+                $mesFinal = "Marzo";
+                break;
+            case 4:
+                $mesFinal = "Abril";
+                break;
+            case 5:
+                $mesFinal = "Mayo";
+                break;
+            case 6:
+                $mesFinal = "Junio";
+                break;
+            case 7:
+                $mesFinal = "Julio";
+                break;
+            case 8:
+                $mesFinal = "Agosto";
+                break;
+            case 9:
+                $mesFinal = "Septiembre";
+                break;
+            case 10:
+                $mesFinal = "Octubre";
+                break;
+            case 11:
+                $mesFinal = "Noviembre";
+                break;
+            case 12:
+                $mesFinal = "Diciembre";
+                break;
+        }
+    } else {
+        $idEF = '';
     }
 
 ?>
 <title>Tus Constancias</title>
 
 <div class="titulo">
-    <h1>Selecciona el Evento Formativo</h1>
+    <h1>Tus Constancias</h1>
 </div>
-<div class="cuadro">
+<div class="listaeventos">
     <form method="POST">
         @csrf
-        <div class="listaeventos">
+        <div class="lista">
             <table>
-                <tr>
-                    <th>id</th>
-                    <th>Nombre</th>
-                    <th></th>
-                </tr>
+                <thead class="tablatitulo">
+                    <tr>
+                        <th>Tus Eventos Formativos terminados</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="opciones">
                 <?php
                     if($listaEFTerminados != null){
                         foreach($listaEFTerminados as $elemento){
                             echo "<tr>";
-                            echo "<td>" . $elemento['idEF'] . "</td>";
                             echo "<td>" . $elemento['nombreEF'] . "</td>";
-                            echo "<td><input type='radio' id='seleccion' name='idEF' value=" . $elemento['idEF'] . " required></td>";
+                            echo "<td><input type='radio' id='seleccion' name='idEF' value=" . $elemento['idEF'] . " required ". (($idEF == $elemento['idEF'])?'checked': '') . "></td>";
                             echo "</tr>";
                         }
                     } else {
                         echo "<tr>";
-                        echo "<td colspan=2>No tienes Eventos Formativos o aún no terminan</td>";
+                        echo "<td colspan=2>No estás inscrito a ningún Evento Formativo o estos aún no terminan.</td>";
                         echo "</tr>";
                     }
                 ?>
+                </tbody>
             </table>
-            <button type="submit" name="boton">Ver Constancia</button>
+        </div>
+        <div class="botoncito">
+            <button type="submit" name="boton" <?php echo $listaEFTerminados != null?'':'disabled';?>>Ver Constancia</button>
         </div>
     </form>
-    <div class="constanciaprint">
-        <?php
-            if ($_SERVER["REQUEST_METHOD"] == "POST"){
-                if($autoeval == 0){
-                    echo "<p> No has realizado la autoevaluacion</p>";
-                    $bandera = false;
-                }
-                if($evaldocente == 0){
-                    echo "<p> No has realizado la evaluacion a tu instructor</p>";
-                    $bandera = false;
-                }
-                if($evalprograma == 0){
-                    echo "<p> No has realizado la evaluacion al programa</p>";
-                    $bandera = false;
-                }
-                if($calificado == 0){
-                    echo "<p> Tu instructor no te ha evaluado</p>";
-                    $bandera = false;
-                }
-                if($bandera == true){
-                    echo "<p>Ye</p>";
-                }
-            } else {
-                echo "<p>Selecciona un Evento Formativo para ver tu constancia</p>";
-            }
-        ?>
-    </div>
 </div>
-
+<div class="cuadroconst">
+    <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+            if($autoeval['autoeval'] == 0){
+                if($bandera == true) echo "<span style='font-size:20px'>Seleccionaste el Evento Formativo: <span style='font-weight:bold'>" . $EF['nombreEF'] . "</span></span>";
+                echo "<div class='alerta'>";
+                echo "No has realizado tu autoevaluación.";
+                echo "</div>";
+                $bandera = false;
+            }
+            if($evaldocente['evaldoc'] == 0){
+                if($bandera == true) echo "<span style='font-size:20px'>Seleccionaste el Evento Formativo: <span style='font-weight:bold'>" . $EF['nombreEF'] . "</span></span>";
+                echo "<div class='alerta'>";
+                echo "No has realizado la evaluación a tu instructor.";
+                echo "</div>";
+                $bandera = false;
+            }
+            if($evalprograma['evalpro'] == 0){
+                if($bandera == true) echo "<span style='font-size:20px'>Seleccionaste el Evento Formativo: <span style='font-weight:bold'>" . $EF['nombreEF'] . "</span></span>";
+                echo "<div class='alerta'>";
+                echo "No has realizado la evaluación al programa.";
+                echo "</div>";
+                $bandera = false;
+            }
+            if($calificado['evalParticipantes'] == 0){
+                if($bandera == true) echo "<span style='font-size:20px'>Seleccionaste el Evento Formativo: <span style='font-weight:bold'>" . $EF['nombreEF'] . "</span></span>";
+                echo "<div class='alerta'style='background-color:#ff8000'>";
+                echo "El instructor no te ha evaluado.";
+                echo "</div>";
+                $bandera = false;
+            }
+            if($aprobado['aprobado'] == 0){
+                if($bandera == true) echo "<span style='font-size:20px'>Seleccionaste el Evento Formativo: <span style='font-weight:bold'>" . $EF['nombreEF'] . "</span></span>";
+                echo "<div class='alerta'>";
+                echo "No aprobaste este Evento Formativo.";
+                echo "</div>";
+                $bandera = false;
+            }
+            if($bandera == true){
+                echo "<div class='constancia'>";
+                echo "<img src='http://sistemaeventosformativos.test/\img\unisonescudo.gif' height='120' width='120' alt='logo'><br>";
+                echo "<h1><span style='line-height:60px'>Constancia</span></h1>";
+                echo "<p>Esta constancia demuestra que <span style='text-decoration:underline'>" . $usuario['nombreUsuario'] . " " . $usuario['apellidoUsuario'] . "</span> ha completado el Evento Formativo <span style='font-weight:bold'> \"" . $EF['nombreEF'] . "\"</span> de manera satisfactoria.<br><span style='font-size:13px'>Del día ".$EF['diaInicio']." de ".$mesInicio." al día ".$EF['diaFinal']." de ".$mesFinal." con un total de " . $EF['duracion'] . " horas.</span></p>";
+                echo "</div>";
+            }
+        } else {
+            echo "<span style='font-size:20px;text-align:center'>← Selecciona un Evento Formativo para ver tu constancia.</span>";
+        }
+    ?>
+</div>
 @endsection

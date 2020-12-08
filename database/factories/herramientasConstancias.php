@@ -35,4 +35,22 @@
             $resultado = $this->conexion_db->query("CALL evalproRealizada($idEF, $idUsuario)");
             return $resultado->fetch_all(MYSQLI_ASSOC);
         }
+
+        // Usuario aprobó Evento Formativo?
+        public function participanteAprobado($idEF, $idUsuario){
+            $resultado = $this->conexion_db->query("CALL participanteAprobado($idEF, $idUsuario)");
+            return $resultado->fetch_all(MYSQLI_ASSOC);
+        }
+
+        // SELECT con datos de un Usuario
+        public function selectUsuario($idUsuario){
+            $resultado = $this->conexion_db->query("SELECT * FROM usuario WHERE usuario.idUsuario = $idUsuario");
+            return $resultado->fetch_all(MYSQLI_ASSOC);
+        }
+
+        // SELECT con datos de un Evento Formativo
+        public function selectEF($idEF){
+            $resultado = $this->conexion_db->query("CALL selectEF($idEF)");
+            return $resultado->fetch_all(MYSQLI_ASSOC);
+        }
     }
