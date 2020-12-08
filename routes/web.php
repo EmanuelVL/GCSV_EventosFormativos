@@ -39,6 +39,18 @@ Route::get('/informacion', function () {
     return view('informacion');
 });
 
+Route::get('/evaluaciones', function () {
+    return view('evaluaciones');
+});
+
+Route::match(array('GET', 'POST'),'evaluacionesInstructor', function () {
+    return view('evaluacionesInstructor');
+});
+
+Route::match(array('GET', 'POST'),'evaluacionesParticipante', function () {
+    return view('evaluacionesParticipante');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
