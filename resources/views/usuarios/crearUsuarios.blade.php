@@ -33,11 +33,15 @@
                 {!! $errors->first('password','<span class="help-block" style="color:red;">:message</span>')!!}
               </div>
 
+              <!--
+                {{--
               <div class="form-group " {{ $errors->has('password-confirm') ? 'has-error' : ''}}>
                 <label for="password-confirm">Confirmar Contraseña</label>
                 <input id="password-confirm" type="password" name="password" rows="4" class='form-control' cols="50" name='password' name="password_confirmation" required=""></input>
                 {!! $errors->first('password-confirm','<span class="help-block" style="color:red;">:message</span>')!!}
               </div>
+              --}}
+              -->
 
               <div class="form-group" {{ $errors->has('instacia') ? 'has-error' : ''}}>
                 <label for="instacia">Es Instancia (0) No y (1) Si</label>

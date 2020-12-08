@@ -46,6 +46,7 @@ class ControladorUsuarios extends Controller
         $usuario->password = $request->input('password');
         $usuario->esInstancia = $request->input('esInstancia');
 
+        /*
         $password_confirm = $request->input('password_confirm');
 
         if($usuario->password != $password_confirm){
@@ -63,6 +64,18 @@ class ControladorUsuarios extends Controller
 
                 $instructor->save();
             }
+            */
+
+            $usuario->save();
+
+            $instructor = $request->input('instructor');
+
+            if($instructor == 1){
+                $instructor = new Instructor();
+
+            $instructor->idUsuario = $usuario->idUsuario;
+
+            $instructor->save();
 
             return redirect()->route('gestionusuarios.index')->with('success','Usuario Creado satisfactoriamente.');
         }
@@ -108,6 +121,7 @@ class ControladorUsuarios extends Controller
         $usuario->correo = $request->correo;
         $usuario->password = $request->password;
 
+        /*
         $password_confirm = $request->input('password_confirm');
 
         if($usuario->password != $password_confirm){
@@ -120,6 +134,11 @@ class ControladorUsuarios extends Controller
             return redirect()->route('gestionusuarios.index')
                         ->with('success','Usuario actualizado satisfactoriamente.');
         }
+        */
+
+        $usuario->save();
+
+        return redirect()->route('gestionusuarios.index')->with('success','Usuario actualizado satisfactoriamente.');
     }
 
     /**
