@@ -69,6 +69,9 @@ SELECT evalParticipantes FROM eventoformativo WHERE eventoformativo.idEF = idEF$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `selectEF` (IN `idEF` INT)  NO SQL
 SELECT eventoformativo.nombreEF, DAY(eventoformativo.fechaInicio) AS diaInicio, MONTH(eventoformativo.fechaInicio) AS mesInicio, DAY(eventoformativo.fechaFinal) AS diaFinal, MONTH(eventoformativo.fechaFinal) AS mesFinal, eventoformativo.duracion FROM eventoformativo WHERE eventoformativo.idEF = idEF$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listaEFTerminadosInstructores` (IN `idUsuario` INT)  NO SQL
+SELECT * FROM eventoformativo INNER JOIN instructor ON eventoformativo.idInstructor = instructor.idInstructor WHERE instructor.idUsuario = idUsuario AND eventoformativo.fechaFinal <= DATE(NOW())$$
+
 DELIMITER ;
 
 -- --------------------------------------------------------
