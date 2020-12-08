@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 08, 2020 at 12:33 PM
+-- Generation Time: Dec 08, 2020 at 04:25 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sistemaeventosformativos`
+-- Database: `db13`
 --
 
 DELIMITER $$
@@ -189,6 +190,7 @@ CREATE TABLE `instructor` (
 
 CREATE TABLE `modulo` (
   `idModulo` int(11) NOT NULL,
+  `idEF` int(11) NOT NULL,
   `nombreModulo` varchar(60) NOT NULL,
   `contenidoModulo` text,
   `duracionModulo` int(11) NOT NULL

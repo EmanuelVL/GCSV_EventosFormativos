@@ -14,11 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $evento = EventoFormativo::All();
+    return view('welcome',compact('evento'));
 });
 
 Route::get('/home', function () {
-    return view('welcome');
+    $evento = EventoFormativo::All();
+    return view('welcome',compact('evento'));
 });
 
 Route::get('/registro', function () {
@@ -41,7 +43,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
+Route::resource('modulos', 'ControladorModulos');
 Route::resource('gestioneventos','ControladorEventosFormativos');
 
 Route::resource('gestionusuarios','ControladorUsuarios');
@@ -54,6 +56,4 @@ Route::get('modulos', function () {
     return view('modulos');
 });
 
-Route::get('agregarmodulo', function () {
-    return view('agregarmodulo');
-});
+Route::get('/agregarModulo', 'ControladorEventosFormativos@agregarModulo')->name('gestioneventos.agregarModulo');

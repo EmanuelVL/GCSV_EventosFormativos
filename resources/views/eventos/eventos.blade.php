@@ -65,7 +65,7 @@
                             </div>
 
                             <div class="col-lg-6 col-md-6 flex-fill">
-                                <form style="margin: 0px;" action=""  method="POST">
+                                <form style="margin: 0px;" action="{{route('gestioneventos.destroy',$evento->idEF)}}"  method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <center>

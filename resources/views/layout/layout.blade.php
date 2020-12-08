@@ -45,13 +45,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <a href="/gestioneventos" class="nav-link">Administrar eventos</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="/modulos" class="nav-link">Módulos</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="/constancias" class="nav-link">Constancias</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="" class="nav-link">Todos los eventos</a>
+        <a href="/eventos" class="nav-link">Todos los eventos</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="" class="nav-link">Evaluaciones</a>
@@ -67,15 +61,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Messages Dropdown Menu -->
 
       <!-- Notifications Dropdown Menu -->
-      <li class="nav-item ">
-        <a class="nav-link" href="/notificaciones">
-          <i class="far fa-bell"></i>
-          <span class="brand-text font-weight-light">Notificaciones</span>
-          <span class="badge badge-warning navbar-badge"></span>
-        </a>
-
-      </li>
-
+      
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -86,7 +72,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <a href="/" class="brand-link">
       <img src="/adminlte/img/logo.png" alt="Unison logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light" style='color:transparent'> .</span>
+      <span class="brand-text font-weight-light"> .</span>
     </a>
 
     <!-- Sidebar -->
@@ -109,13 +95,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
           <li class="nav-item ">
-            <a href="/categorias" class="nav-link ">
-              <i class="far fa-circle nav-icon"></i>
-              <p>
-                Tus eventos
+           
 
-              </p>
-            </a>
+              <li class="nav-item">
+                <a href="{{route('gestioneventos.agregarModulo')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Agregar modulos</p>
+                </a>
+              </li>
 
               <li class="nav-item">
                 <a href="/gestionusuarios" class="nav-link">
@@ -125,20 +112,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
 
 
-                <li class="nav-item">
+                
 
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Notificaciones  </p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p> Perfil </p>
-                </a>
-              </li>
+              
 
               <br>
 
@@ -182,6 +158,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <div class="float-right d-none d-sm-inline">
+      Anything you want
+    </div>
+    <!-- Default to the left -->
+    <strong>Copyright &copy; Doriclub 2019 <a href="http://doriclub.ml">Doriclub.ml</a>.</strong> All rights reserved.
+  </footer>
 </div>
 <!-- ./wrapper -->
 

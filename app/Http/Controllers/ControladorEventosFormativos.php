@@ -5,10 +5,10 @@ use DB;
 use Illuminate\Http\Request;
 use App\EventoFormativo;
 use App\Usuario;
+use App\Instructor;
+use App\tipoEvento;
 use App\Rules\EventoFormativo as AppEventoFormativo;
 use App\Documento;
-
-
 
 
 class ControladorEventosFormativos extends Controller
@@ -34,11 +34,13 @@ class ControladorEventosFormativos extends Controller
     public function create()
     {
         $usuarios= Usuario::all();
+        $instructor = Instructor::all();
+        $tipoEvento = tipoEvento::all();
         // dd($academicos);
         // $academicoConCategoria = Academico::has('categoria')->get();
         //$academicoSinCategoria = Academico::doesnthave('categoria')->get();
 
-        return view('eventos.crearEvento',compact('usuarios'));
+        return view('eventos.crearEvento',compact('usuarios','instructor','tipoEvento'));
     }
      public function lista()
     {
@@ -61,36 +63,63 @@ class ControladorEventosFormativos extends Controller
      */
     public function store(Request $request)
     {
-        $eventoFormativo = new EventoFormativo();
-        $credentials=$this->validate($request, array(
-            'nombreCategoria' => 'required|min:5|max:100|regex:/^[a-zA-Z][\s\S]*/'.$categoria->id,
-            'descripcionCategoria'=> 'required|min:20|regex:/^[a-zA-Z][\s\S]*/',
-        ));
-
-
-        if($credentials){
-
-            $categoria ->nombre= $request->input('nombreCategoria');
-            $categoria ->descripcion= $request->input('descripcionCategoria');
-
-            //condiciona que si se envia el formulario sin academicos pongo el atributo academico_id con el valor de null
-            if($request->academicoID == 'NULL'){
-                $categoria ->academico_id= null;
-                $categoria->save();
-                return redirect()->route('categorias.index');
-            }else{
-                $academico = Academico::findOrFail($request->academicoID);
-                $categoria -> academico()->associate($academico);
-                $categoria->save();
-                return redirect()->route('categorias.index');
-            }
-
-        }else{
+        if( $request->input('fechaInicio') > $request->input('fechaFinal')){
             //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
-            return back()->withInput(request(['nombreCategoria'=>'hehexd']));
+            return back()->withInput(request(['fechaInicio']));
+            
         }
-
-
+        if( $request->input('tipoEvento') == 4 && $request->input('duracionEvento') < 120){
+            //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
+            return back()->withInput(request(['fechaInicio']));
+            
+        }
+        if( $request->input('tipoEvento') == 1 && $request->input('duracionEvento') < 20){
+            //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
+            return back()->withInput(request(['fechaInicio']));
+            
+        }
+        if( $request->input('tipoEvento') == 2 && $request->input('duracionEvento') < 10){
+            //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
+            return back()->withInput(request(['fechaInicio']));
+            
+        }
+        if( $request->input('tipoEvento') == 3 && $request->input('duracionEvento') < 20){
+            //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
+            return back()->withInput(request(['fechaInicio']));
+            
+        }
+          
+          
+           
+        
+        $credentials=1;
+   
+        if($credentials){
+            $eventoFormativo = new EventoFormativo();
+            $eventoFormativo ->nombreEF = $request->input('nombreEvento');
+            $eventoFormativo ->descripcion = $request->input('descripcionEvento');
+            $eventoFormativo ->fechaInicio= $request->input('fechaInicio');
+            $eventoFormativo ->fechaFinal= $request->input('fechaFinal');
+            $eventoFormativo ->modalidad = $request->input('modalidadEvento');
+            $eventoFormativo ->idTipo = $request->input('tipoEvento');;
+            $eventoFormativo ->idInstructor =  $request->input('instructorID');
+            $eventoFormativo ->idInstancia = 1;
+            $eventoFormativo ->diseñoInstruccional = $request->input('diseñoInstruccional');
+            $eventoFormativo ->utilidadOportunidad = $request-> input('utilidadOpurtunidad');
+            $eventoFormativo ->requisitosParticipacion = $request->input('requisitosParticipacion');
+            $eventoFormativo ->requisitosAcreditacion = $request->input('requisitosParticipacion');
+            $eventoFormativo ->condicionesOperativas = $request->input('condicionesOperativas');
+            $eventoFormativo ->cuota = $request->input('cuotaEvento');
+            $eventoFormativo ->duracion = $request->input('duracionEvento');
+            
+            $eventoFormativo ->save();
+        
+            return redirect()->route('gestioneventos.index');
+        
+    }else{
+   //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
+        return back()->withInput(request(['nombrePlan']));
+    }
 
     }
 
@@ -103,9 +132,17 @@ class ControladorEventosFormativos extends Controller
     public function show($idEF)
     {
         $evento = EventoFormativo::where('idEF', $idEF)->firstOrFail();
-        
+        $evento = EventoFormativo::where('idEF', $idEF)->firstOrFail();
 
         return view('eventos.detallesEvento', compact('evento'));
+    }
+
+    public function destroy($idEF)
+    {
+        echo ($idEF);
+        $evento = EventoFormativo::where('idEF', $idEF)->firstOrFail();
+        $evento-> delete();
+        return redirect()->route('gestioneventos.index');
     }
 
     /**
@@ -119,9 +156,11 @@ class ControladorEventosFormativos extends Controller
 
         $evento = EventoFormativo::where('idEF', $idEF)->firstOrFail();
         $usuarios = Usuario::all();
+        $instructor = Instructor::all();
+        $tipoEvento = tipoEvento::all();
         //checa si la categoria tiene un academico o no
         
-        return view('eventos.modificarEvento',compact('evento','usuarios'));
+        return view('eventos.modificarEvento',compact('evento','usuarios','instructor','tipoEvento'));
        
     }
 
@@ -132,78 +171,63 @@ class ControladorEventosFormativos extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $idEF)
     {
-
-        $credentials=$this->validate($request, array(
-            'nombreCategoria' => 'required|min:5|max:100|regex:/^[a-zA-Z][\s\S]*/',
-            'descripcionCategoria'=> 'required|min:10|regex:/^[a-zA-Z][\s\S]*/',
-
-        ));
-        // dd($request->academicoID);
-        if($credentials){
-            $categoria = Categoria::findOrFail($id);
-            $categoria ->nombre= $request->input('nombreCategoria');
-            $categoria ->descripcion= $request->input('descripcionCategoria');
-            //condiciona que si se envia el formulario sin academicos pongo el atributo academico_id con el valor de null
-            if($request->academicoID == 'NULL'){
-                $categoria ->academico_id= null;
-                $categoria->save();
-                return redirect()->route('categorias.index');
-            }else{
-                $academico = Academico::findOrFail($request->academicoID);
-                $categoria -> academico()->associate($academico);
-                $categoria->save();
-                return redirect()->route('categorias.index');
-            }
-        }else{
+        if( $request->input('fechaInicio') > $request->input('fechaFinal')){
             //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
-            return back()->withInput(request(['nombreCategoria']));
+            return back()->withInput(request(['fechaInicio']));
+            
         }
+        if( $request->input('tipoEvento') == 4 && $request->input('duracionEvento') < 120){
+            //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
+            return back()->withInput(request(['duracionEvento']));
+            
+        }
+        if( $request->input('tipoEvento') == 1 && $request->input('duracionEvento') < 20){
+            //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
+            return back()->withInput(request(['duracionEvento']));
+            
+        }
+        if( $request->input('tipoEvento') == 2 && $request->input('duracionEvento') < 10){
+            //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
+            return back()->withInput(request(['duracionEvento']));
+            
+        }
+        if( $request->input('tipoEvento') == 3 && $request->input('duracionEvento') < 20){
+            //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
+            return back()->withInput(request(['duracionEvento']));
+            
+        }
+          
+            $eventoFormativo = EventoFormativo::where('idEF', $idEF)->firstOrFail();
+            $eventoFormativo ->nombreEF = $request->input('nombreEvento');
+            $eventoFormativo ->descripcion = $request->input('descripcionEvento');
+            $eventoFormativo ->fechaInicio= $request->input('fechaInicio');
+            $eventoFormativo ->fechaFinal= $request->input('fechaInicio');
+            $eventoFormativo ->modalidad = $request->input('modalidadEvento');
+            $eventoFormativo ->idTipo = $request->input('tipoEvento');;
+            $eventoFormativo ->idInstructor =  $request->input('instructorID');
+            $eventoFormativo ->idInstancia = 1;
+            $eventoFormativo ->diseñoInstruccional = $request->input('diseñoInstruccional');
+            $eventoFormativo ->utilidadOportunidad = $request-> input('utilidadOpurtunidad');
+            $eventoFormativo ->requisitosParticipacion = $request->input('requisitosParticipacion');
+            $eventoFormativo ->requisitosAcreditacion = $request->input('requisitosParticipacion');
+            $eventoFormativo ->condicionesOperativas = $request->input('condicionesOperativas');
+            $eventoFormativo ->cuota = $request->input('cuotaEvento');
+            $eventoFormativo ->duracion = $request->input('duracionEvento');
+            
+            $eventoFormativo ->save();
+            return redirect()->route('gestioneventos.index');
+        
+       
+      
     }
 
-    public function categoriaReporte($id){
-        $categoria = Categoria::findOrFail($id);
-        $merger = \PDFMerger::init();
-        $pdf = PDF::loadView('categorias/reporte', ['categoria'=>$categoria]);
-        $output = $pdf->output();
-        file_put_contents($categoria->nombre, $output);
-        $merger->addPathToPDF($categoria->nombre, 'all', 'P');
-        foreach($categoria->recomendaciones as $recomendacion){
-            $planesCompletados = PlanAccion::where('completado', 1)->where('recomendacion_id', $recomendacion->id)->get();
-            $planesProgreso = PlanAccion::where('completado', 0)->where('recomendacion_id', $recomendacion->id)->get();
-            $pdf = PDF::loadView('recomendaciones/reporte', ['recomendacion'=>$recomendacion, 'planesCompletados'=>$planesCompletados, 'planesProgreso'=>$planesProgreso]);
-            $output = $pdf->output();
-            file_put_contents($recomendacion->nombre, $output);
-            $merger->addPathToPDF( $recomendacion->nombre , 'all', 'P');
-            foreach($recomendacion->planes as $plan){
-                $pdf = PDF::loadView('planAccion/reporte', ['plan'=>$plan]);
-                $output = $pdf->output();
-                file_put_contents($plan->nombre, $output);
-                $merger->addPathToPDF( $plan->nombre , 'all', 'P');
-                foreach($plan->evidencias as $evidencia){
-                    if($evidencia->tipo_archivo == "pdf"){
-                        $merger->addPathToPDF(ltrim($evidencia->archivo_bin, $evidencia->archivo_bin[0]));
-                    }
-                }
-            }
-        }
-        $merger->merge();
-        $merger->save("mergedpdf.pdf");
-        $archivo = "/mergedpdf.pdf";
-        return view('categorias.verReporte', compact('archivo', 'categoria'));
+   
+    public function agregarModulo(){
+        return view('eventos.agregarModulos',compact('evento','usuarios','instructor','tipoEvento'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function eliminarEvento($idEF)
-    {
-        $evento = EventoFormativo::where('idEF', $idEF)->firstOrFail();
-        $evento-> delete();
-        return redirect()->route('gestioneventos.index');
-    }
+
+  
 }
