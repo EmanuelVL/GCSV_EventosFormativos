@@ -46,20 +46,26 @@ class ControladorUsuarios extends Controller
         $usuario->password = $request->input('password');
         $usuario->esInstancia = $request->input('esInstancia');
 
-        $usuario->save();
+        $password_confirm = $request->input('password_confirm');
 
-        $instructor = $request->input('instructor');
-
-        if($instructor == 1){
-            $instructor = new Instructor();
-
-            $instructor->idUsuario = $usuario->idUsuario;
-
-            $instructor->save();
+        if($usuario->password != $password_confirm){
+            return redirect()->route('gestionusuarios.index')->with('failed','Usuario no ha podido ser creado satisfactoriamente, ya que las contraseñas no son identicas.');;
         }
+        else{
+            $usuario->save();
 
-        return redirect()->route('gestionusuarios.index')
-                        ->with('success','Usuario Creado satisfactoriamente.');
+            $instructor = $request->input('instructor');
+
+            if($instructor == 1){
+                $instructor = new Instructor();
+
+                $instructor->idUsuario = $usuario->idUsuario;
+
+                $instructor->save();
+            }
+
+            return redirect()->route('gestionusuarios.index')->with('success','Usuario Creado satisfactoriamente.');
+        }
     }
 
     /**
@@ -102,10 +108,18 @@ class ControladorUsuarios extends Controller
         $usuario->correo = $request->correo;
         $usuario->password = $request->password;
 
-        $usuario->save();
+        $password_confirm = $request->input('password_confirm');
 
-        return redirect()->route('gestionusuarios.index')
+        if($usuario->password != $password_confirm){
+
+            return redirect()->route('gestionusuarios.index')->with('failed','Usuario no ha podido ser creado satisfactoriamente, ya que las contraseñas no son identicas.');;
+        }
+        else{
+            $usuario->save();
+
+            return redirect()->route('gestionusuarios.index')
                         ->with('success','Usuario actualizado satisfactoriamente.');
+        }
     }
 
     /**
