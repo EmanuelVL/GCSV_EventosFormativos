@@ -118,7 +118,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
 
               <li class="nav-item">
-                <a href="/academicos" class="nav-link">
+                <a href="/gestionusuarios" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Usuarios</p>
                 </a>

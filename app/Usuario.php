@@ -9,12 +9,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Usuario extends Authenticatable
 {
-    use Notifiable;
+    //use Notifiable;
     public $timestamps = false;
     protected $table='usuario';
-    protected $fillable =['nombre','correo','password'];
-    protected $hidden = ['password', 'remember_token',];
+    protected $primaryKey = 'idUsuario';
+    protected $fillable =['nombreUsuario','apellidoUsuario','correo','password','esInstancia'];
+    //protected $hidden = ['password', 'remember_token',];
 
-   
+
 }
 
