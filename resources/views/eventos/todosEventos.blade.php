@@ -27,9 +27,6 @@
                       <div class="card-header">
                         <h5 class="m-0">Descripcion: {{$eventos->descripcion}} </h5>
                       </div>
-                      <div class="card-header">
-                        <h5 class="m-0"> {{$eventos->fechaInicio}} </h5>
-                      </div>
                       <div class="card-body">
                         <p class="card-text"></p>
                         <a href="{{route('gestioneventos.show',$eventos->idEF)}}" class="btn btn-primary">Ver más</a>

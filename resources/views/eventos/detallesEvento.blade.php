@@ -16,8 +16,18 @@
 <div class="card" align="center">
               <div class="card-header border-0">
                 <h3 class="card-title">  <i class="fas fa-globe"></i> Evento: {{$evento->nombreEF}} </h3>
-                <div class="card-tools">
+                
+                <center>
+                                
+                                <a type="button" style="color:white ;" class="btn btn-info btn-sm" href="{{route('modulos.show',$evento->idEF)}}">
 
+                                    Ver modulos
+                                </a>
+                           
+                            </center>
+                <div class="card-tools">
+                 
+                            
                 </div>
               </div>
               <div class="card-body table-responsive p-0">
@@ -25,50 +35,111 @@
                   <thead>
                 
                   <tr>
-                    <th>Nombre: {{$evento->nombreEF}}</th>
+                    <th>
+                        <div class="card-header">
+                            <h5 class="m-0">{{$evento->nombreEF}} </h5>
+                        </div>
+                    </th>
+                    
+                  </tr>
+                  <tr>
+                    <th>
+                    <div class="card-header">
+                            <h5 class="m-0">Fecha de inicio: {{$evento->fechaInicio}} </h5>
+                        </div>
+                    </th>
+                   
+
+                  </tr>
+
+                  <tr>
+                    <th>
+                    <div class="card-header">
+                            <h5 class="m-0">Fecha de fin: {{$evento->fechaFinal}} </h5>
+                        </div>
+                    </th>
+                   
+
+                  </tr>>
+
+                  <tr>
+                    <th>
+                        <div class="card-header">
+                            <h5 class="m-0">Modalidad: {{$evento->modalidad}} </h5>
+                        </div>
+                    </th>
                    
 
                   </tr>
                   <tr>
-                    <th>Fecha inicio: {{$evento->fechaInicio}}</th>
+                    <th>
+                    <div class="card-header">
+                            <h5 class="m-0">Instructor: {{$evento->idInstructor}} </h5>
+                        </div>
+                    </th>
                    
 
                   </tr>
                   <tr>
-                    <th>Fecha de fin: {{$evento->fechaFinal}}</th>
+                    <th>
+                    <div class="card-header">
+                            <h5 class="m-0">Diseño instruccional: {{$evento->diseñoInstruccional}} </h5>
+                        </div>
+                    </th>
                    
 
                   </tr>
                   <tr>
-                    <th>Modalidad: {{$evento->modalidad}}</th>
+                    <th>
+                        <div class="card-header">
+                            <h5 class="m-0">Utilidad oportunidad: {{$evento->utilidadOportunidad}} </h5>
+                        </div>
+                    </th>
                    
 
                   </tr>
                   <tr>
-                    <th>Instructor: {{$evento->idInstructor}}</th>
-                   
+                    <th>
+                        <div class="card-header">
+                            <h5 class="m-0">Requisitos de participación: {{$evento->requisitosParticipacion}}</h5>
+                        </div>
+                        </th>
+                  </tr>
 
+                  <tr>
+                    <th>
+                        <div class="card-header">
+                            <h5 class="m-0">Requisitos de acreditación: {{$evento->requisitosAcreditacion}}</h5>
+                        </div>
+                        </th>
                   </tr>
                   <tr>
-                    <th>Diseño instruccional: {{$evento->diseñoInstruccional}}</th>
-                   
-
+                    <th>
+                        <div class="card-header">
+                            <h5 class="m-0">Condiciones operativas: {{$evento->condicionesOperativas}}</h5>
+                        </div>
+                        </th>
                   </tr>
                   <tr>
-                    <th>Utilidad oportunidad: {{$evento->utilidadOportunidad}}</th>
-                   
-
+                    <th>
+                        <div class="card-header">
+                            <h5 class="m-0">Cuota: {{$evento->cuota}}$</h5>
+                        </div>
+                        </th>
                   </tr>
                   <tr>
-                    <th>Requisitos de participación: {{$evento->requisitosParticipacion}}</th>
-                   
-
+                    <th>
+                        <div class="card-header">
+                            <h5 class="m-0">Duración: {{$evento->duracion}} horas</h5>
+                        </div>
+                        </th>
                   </tr>
                   </thead>
                  
                 </table>
 
             </div>
+          
             
             </div>
 </div>
