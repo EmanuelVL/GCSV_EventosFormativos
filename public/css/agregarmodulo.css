@@ -1,0 +1,37 @@
+.titulo{
+    text-align: center;
+    margin-bottom: 20px;
+    padding-top: 10px;
+}
+
+.caja{
+    text-align: center;
+}
+
+.formularioModulo{
+    padding: 15px;
+    width: 50%;
+    margin: 0 auto;
+    border: solid 2px;
+}
+
+.entrada{
+    padding: 8px;
+}
+
+.botoncito{
+    width: 19.5%;
+    text-align: center;
+    display: block;
+    padding-top: 15px;
+    margin: 0 auto;
+}
+
+.botoncito button {
+    width: 80%;
+    font-weight: bold;
+    height: 60px;
+    font-size: larger;
+    border-radius: 8px;
+    background-color: #bfbfbf;
+}

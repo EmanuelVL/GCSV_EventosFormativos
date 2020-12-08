@@ -47,3 +47,11 @@ Route::resource('gestioneventos','ControladorEventosFormativos');
 Route::match(array('GET', 'POST'),'constancias', function () {
     return view('constancias');
 });
+
+Route::get('modulos', function () {
+    return view('modulos');
+});
+
+Route::get('agregarmodulo', function () {
+    return view('agregarmodulo');
+});

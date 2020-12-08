@@ -45,6 +45,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <a href="/gestioneventos" class="nav-link">Administrar eventos</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
+        <a href="/modulos" class="nav-link">Módulos</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
         <a href="/constancias" class="nav-link">Constancias</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
