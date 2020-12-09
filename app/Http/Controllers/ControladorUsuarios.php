@@ -76,9 +76,9 @@ class ControladorUsuarios extends Controller
             $instructor->idUsuario = $usuario->idUsuario;
 
             $instructor->save();
-
-            return redirect()->route('gestionusuarios.index')->with('success','Usuario Creado satisfactoriamente.');
         }
+
+        return redirect()->route('gestionusuarios.index')->with('success','Usuario Creado satisfactoriamente.');
     }
 
     /**
