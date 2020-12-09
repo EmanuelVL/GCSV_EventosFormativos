@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 08, 2020 at 04:25 PM
+-- Generation Time: Dec 09, 2020 at 04:13 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db13`
+-- Database: `db133`
 --
 
 DELIMITER $$
@@ -59,6 +59,9 @@ SELECT COUNT(*) AS evalpro FROM evaluacionprograma
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listaEFTerminados` (IN `idUsuario` INT)  NO SQL
 SELECT * FROM eventoformativo INNER JOIN detalleeventoparticipante ON eventoformativo.idEF = detalleeventoparticipante.idEF WHERE detalleeventoparticipante.idUsuario = idUsuario AND eventoformativo.fechaFinal <= DATE(NOW())$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listaEFTerminadosInstructores` (IN `idUsuario` INT)  NO SQL
+SELECT * FROM eventoformativo INNER JOIN instructor ON eventoformativo.idInstructor = instructor.idInstructor WHERE instructor.idUsuario = idUsuario AND eventoformativo.fechaFinal <= DATE(NOW())$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `participanteAprobado` (IN `idEF` INT, IN `idUsuario` INT)  NO SQL
 SELECT aprobado FROM detalleeventoparticipante
 WHERE detalleeventoparticipante.idEF = idEF AND detalleeventoparticipante.idUsuario = idUsuario$$
@@ -68,9 +71,6 @@ SELECT evalParticipantes FROM eventoformativo WHERE eventoformativo.idEF = idEF$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `selectEF` (IN `idEF` INT)  NO SQL
 SELECT eventoformativo.nombreEF, DAY(eventoformativo.fechaInicio) AS diaInicio, MONTH(eventoformativo.fechaInicio) AS mesInicio, DAY(eventoformativo.fechaFinal) AS diaFinal, MONTH(eventoformativo.fechaFinal) AS mesFinal, eventoformativo.duracion FROM eventoformativo WHERE eventoformativo.idEF = idEF$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `listaEFTerminadosInstructores` (IN `idUsuario` INT)  NO SQL
-SELECT * FROM eventoformativo INNER JOIN instructor ON eventoformativo.idInstructor = instructor.idInstructor WHERE instructor.idUsuario = idUsuario AND eventoformativo.fechaFinal <= DATE(NOW())$$
 
 DELIMITER ;
 
@@ -154,6 +154,7 @@ CREATE TABLE `evaluacionprograma` (
 CREATE TABLE `eventoformativo` (
   `idEF` int(11) NOT NULL,
   `nombreEF` varchar(80) NOT NULL,
+  `descripcion` text,
   `fechaInicio` date NOT NULL,
   `fechaFinal` date NOT NULL,
   `modalidad` varchar(10) NOT NULL,
