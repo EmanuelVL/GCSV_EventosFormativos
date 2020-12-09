@@ -1,5 +1,5 @@
 <?php
-
+use App\EventoFormativo;
 use Illuminate\Support\Facades\Route;
 
 /*
