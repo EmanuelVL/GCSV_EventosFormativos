@@ -35,10 +35,13 @@ class ControladorModulos extends Controller
             $modulo ->nombreModulo = $request->input('nombreModulo');
             $modulo ->contenidoModulo = $request->input('contenidoModulo');
             $modulo ->duracionModulo = $request->input('duracion');
-          
-            
+            $evento = EventoFormativo::where('idEF', $modulo ->idEF)->firstOrFail();
+            $evento->duracion = $evento->duracion + $modulo ->duracionModulo;
             $modulo ->save();
         
+            
+            
+
             return redirect()->route('modulos.show',$modulo->idEF);
         
     
