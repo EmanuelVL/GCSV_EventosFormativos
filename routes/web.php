@@ -28,7 +28,8 @@ Route::get('/registro', function () {
 });
 
 Route::get('/eventos', function () {
-    return view('eventos');
+    $evento = EventoFormativo::All();
+    return view('eventos.todosEventos',compact('evento'));
 });
 
 Route::get('/eventospersonales', function () {
