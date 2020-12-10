@@ -95,14 +95,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
           <li class="nav-item ">
-           
-
-              <li class="nav-item">
-                <a href="{{route('gestioneventos.agregarModulo')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Agregar modulos</p>
-                </a>
-              </li>
+          
 
               <li class="nav-item">
                 <a href="/gestionusuarios" class="nav-link">
@@ -114,7 +107,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 
 
-              
 
               <br>
 

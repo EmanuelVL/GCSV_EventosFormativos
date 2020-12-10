@@ -13,7 +13,7 @@ class Modulo extends Authenticatable
     public $timestamps = false;
     protected $table='modulo';
     protected $primaryKey = 'idModulo';
-    protected $fillable =['idCreador','nombreModulo','contenidoMod','duracionMod'];
+    protected $fillable =['idEF','nombreModulo','contenidoModulo','duracionModulo'];
     //protected $hidden = ['password', 'remember_token',];
 
     

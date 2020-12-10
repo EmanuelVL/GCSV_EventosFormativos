@@ -15,16 +15,9 @@
 
 <div class="card" align="center">
               <div class="card-header border-0">
-                <h3 class="card-title">  <i class="fas fa-globe"></i> Evento: {{$evento->nombreEF}} </h3>
+                <h5 class="card-title">  <i class="fas fa-globe"></i> Evento: {{$evento->nombreEF}} </h5>
                 
-                <center>
-                                
-                                <a type="button" style="color:white ;" class="btn btn-info btn-sm" href="{{route('modulos.show',$evento->idEF)}}">
-
-                                    Ver modulos
-                                </a>
-                           
-                            </center>
+               
                 <div class="card-tools">
                  
                             
@@ -33,12 +26,19 @@
               <div class="card-body table-responsive p-0">
                 <table class="table table-striped table-valign-middle">
                   <thead>
-                
+                  <center>
+                                
+                                <a type="button" style="color:black ;" class="btn btn-info btn-sm" href="{{route('modulos.show',$evento->idEF)}}">
+                                    Ver modulos del evento
+                                </a>
+                           
+                </center>
                   <tr>
                     <th>
                         <div class="card-header">
                             <h5 class="m-0">{{$evento->nombreEF}} </h5>
                         </div>
+                        
                     </th>
                     
                   </tr>
@@ -60,7 +60,7 @@
                     </th>
                    
 
-                  </tr>>
+                  </tr>
 
                   <tr>
                     <th>
@@ -71,6 +71,8 @@
                    
 
                   </tr>
+
+
                   <tr>
                     <th>
                     <div class="card-header">
@@ -130,7 +132,23 @@
                   <tr>
                     <th>
                         <div class="card-header">
-                            <h5 class="m-0">Duración: {{$evento->duracion}} horas</h5>
+                            <h5 class="m-0">Duración: {{$duracionEF}} horas</h5>
+                          @if ($duracionEF < 120 and $evento->idTipo == 4 )
+                            El evento requiere un minimo de 120 horas para un diplomado
+
+                          @endif
+                          @if ($duracionEF < 120 and $evento->idTipo == 3 )
+                            El evento requiere un minimo de 20 horas para tener valor curricular como Programa especial
+
+                          @endif
+                          @if ($duracionEF < 20 and $evento->idTipo == 1 )
+                            El evento requiere un minimo de 20 horas para tener valor curricular como Curso
+
+                          @endif
+                          @if ($duracionEF < 10 and $evento->idTipo == 2 )
+                            El evento requiere un minimo de 10 horas para tener valor curricular como Taller
+
+                          @endif
                         </div>
                         </th>
                   </tr>

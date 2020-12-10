@@ -39,14 +39,14 @@
 
                     <td>
                        
-                                <a style="color:blue !important;" href="{}">{{$evento->nombreEF}}</a>
+                                <a style="color:blue !important;" href="{{route('gestioneventos.show',$evento->idEF)}}">{{$evento->nombreEF}}</a>
                                  </a>
                                
                     </td>
                 <td style="height:10px;"><p class="descripcion-texto">{{$evento->descripcion}}</p></td>
                 <td>
                        
-                                <a style="color:blue !important;" href="{}">{{$evento->fechaInicio}}</a>
+                                <a style="color:blue !important;" >{{$evento->fechaInicio}}</a>
                                  </a>
                                
                 </td>

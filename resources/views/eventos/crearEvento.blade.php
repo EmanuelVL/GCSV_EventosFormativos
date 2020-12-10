@@ -117,11 +117,7 @@
                 {!! $errors->first('cuotaEvento','<span class="help-block" style="color:red;">:message</span>')!!}
               </div>
 
-              <div class="form-group " {{ $errors->has('cuotaEvento') ? 'has-error' : ''}}>
-                <label for="exampleInputPassword1">Duracion del evento en horas</label>
-                <input type="int" class='form-control' required  name='duracionEvento'></textarea>
-                {!! $errors->first('duracionEvento','<span class="help-block" style="color:red;">:message</span>')!!}
-              </div>
+              
 
               <button type="submit" class="btn pretty-btn" style="float: left; background-color:green; color:white">Crear evento</button>
             </form>

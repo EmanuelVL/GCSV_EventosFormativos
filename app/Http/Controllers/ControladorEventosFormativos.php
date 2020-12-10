@@ -9,7 +9,7 @@ use App\Instructor;
 use App\tipoEvento;
 use App\Rules\EventoFormativo as AppEventoFormativo;
 use App\Documento;
-
+use App\Modulo;
 
 class ControladorEventosFormativos extends Controller
 {
@@ -68,26 +68,7 @@ class ControladorEventosFormativos extends Controller
             return back()->withInput(request(['fechaInicio']));
             
         }
-        if( $request->input('tipoEvento') == 4 && $request->input('duracionEvento') < 120){
-            //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
-            return back()->withInput(request(['fechaInicio']));
-            
-        }
-        if( $request->input('tipoEvento') == 1 && $request->input('duracionEvento') < 20){
-            //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
-            return back()->withInput(request(['fechaInicio']));
-            
-        }
-        if( $request->input('tipoEvento') == 2 && $request->input('duracionEvento') < 10){
-            //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
-            return back()->withInput(request(['fechaInicio']));
-            
-        }
-        if( $request->input('tipoEvento') == 3 && $request->input('duracionEvento') < 20){
-            //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
-            return back()->withInput(request(['fechaInicio']));
-            
-        }
+       
           
           
            
@@ -101,16 +82,18 @@ class ControladorEventosFormativos extends Controller
             $eventoFormativo ->fechaInicio= $request->input('fechaInicio');
             $eventoFormativo ->fechaFinal= $request->input('fechaFinal');
             $eventoFormativo ->modalidad = $request->input('modalidadEvento');
-            $eventoFormativo ->idTipo = $request->input('tipoEvento');;
-            $eventoFormativo ->idInstructor =  $request->input('instructorID');
-            $eventoFormativo ->idInstancia = 1;
+            $eventoFormativo ->idTipo = $request->input('tipoEvento');
+            $eventoFormativo ->idInstructor = $request->input('instructorID');
+            $idIns = $request->input('instructorID');
+            $instructor= Instructor::where('idInstructor', $idIns)->firstOrFail();
+            $eventoFormativo ->idInstancia = $instructor->idUsuario;
             $eventoFormativo ->diseñoInstruccional = $request->input('diseñoInstruccional');
             $eventoFormativo ->utilidadOportunidad = $request-> input('utilidadOpurtunidad');
             $eventoFormativo ->requisitosParticipacion = $request->input('requisitosParticipacion');
             $eventoFormativo ->requisitosAcreditacion = $request->input('requisitosParticipacion');
             $eventoFormativo ->condicionesOperativas = $request->input('condicionesOperativas');
             $eventoFormativo ->cuota = $request->input('cuotaEvento');
-            $eventoFormativo ->duracion = $request->input('duracionEvento');
+            $eventoFormativo ->duracion = 0;
             
             $eventoFormativo ->save();
         
@@ -133,8 +116,13 @@ class ControladorEventosFormativos extends Controller
     {
         $evento = EventoFormativo::where('idEF', $idEF)->firstOrFail();
         $evento = EventoFormativo::where('idEF', $idEF)->firstOrFail();
+        $modulos = Modulo::where('idEF', $idEF)->get();
+        $duracionEF = 0;
+        foreach($modulos as $modulo){
+            $duracionEF = $duracionEF + $modulo->duracionModulo;
+        }
 
-        return view('eventos.detallesEvento', compact('evento'));
+        return view('eventos.detallesEvento', compact('evento','duracionEF'));
     }
 
     public function destroy($idEF)
@@ -178,27 +166,8 @@ class ControladorEventosFormativos extends Controller
             return back()->withInput(request(['fechaInicio']));
             
         }
-        if( $request->input('tipoEvento') == 4 && $request->input('duracionEvento') < 120){
-            //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
-            return back()->withInput(request(['duracionEvento']));
-            
-        }
-        if( $request->input('tipoEvento') == 1 && $request->input('duracionEvento') < 20){
-            //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
-            return back()->withInput(request(['duracionEvento']));
-            
-        }
-        if( $request->input('tipoEvento') == 2 && $request->input('duracionEvento') < 10){
-            //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
-            return back()->withInput(request(['duracionEvento']));
-            
-        }
-        if( $request->input('tipoEvento') == 3 && $request->input('duracionEvento') < 20){
-            //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
-            return back()->withInput(request(['duracionEvento']));
-            
-        }
-          
+       
+
             $eventoFormativo = EventoFormativo::where('idEF', $idEF)->firstOrFail();
             $eventoFormativo ->nombreEF = $request->input('nombreEvento');
             $eventoFormativo ->descripcion = $request->input('descripcionEvento');
@@ -207,14 +176,16 @@ class ControladorEventosFormativos extends Controller
             $eventoFormativo ->modalidad = $request->input('modalidadEvento');
             $eventoFormativo ->idTipo = $request->input('tipoEvento');;
             $eventoFormativo ->idInstructor =  $request->input('instructorID');
-            $eventoFormativo ->idInstancia = 1;
+            $idIns = $request->input('instructorID');
+            $instructor= Instructor::where('idInstructor', $idIns)->firstOrFail();
+            $eventoFormativo ->idInstancia = $instructor->idUsuario;
             $eventoFormativo ->diseñoInstruccional = $request->input('diseñoInstruccional');
             $eventoFormativo ->utilidadOportunidad = $request-> input('utilidadOpurtunidad');
             $eventoFormativo ->requisitosParticipacion = $request->input('requisitosParticipacion');
             $eventoFormativo ->requisitosAcreditacion = $request->input('requisitosParticipacion');
             $eventoFormativo ->condicionesOperativas = $request->input('condicionesOperativas');
             $eventoFormativo ->cuota = $request->input('cuotaEvento');
-            $eventoFormativo ->duracion = $request->input('duracionEvento');
+            $eventoFormativo ->duracion = $eventoFormativo ->duracion;
             
             $eventoFormativo ->save();
             return redirect()->route('gestioneventos.index');
@@ -225,6 +196,7 @@ class ControladorEventosFormativos extends Controller
 
    
     public function agregarModulo(){
+
         return view('eventos.agregarModulos',compact('evento','usuarios','instructor','tipoEvento'));
     }
 
