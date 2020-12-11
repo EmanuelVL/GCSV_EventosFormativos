@@ -1,3 +1,9 @@
+<?php
+    if(!(auth()->user())){
+        header('Location: http://sistemaeventosformativos.test/');
+        die();
+    }
+?>
 <!DOCTYPE html>
 @extends('layout.layout')
 @section('content')  
