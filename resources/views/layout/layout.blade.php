@@ -48,7 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <a href="/eventos" class="nav-link">Todos los eventos</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="" class="nav-link">Evaluaciones</a>
+        <a href="/evaluaciones" class="nav-link">Evaluaciones</a>
       </li>
     </ul>
 
