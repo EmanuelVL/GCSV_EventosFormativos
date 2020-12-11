@@ -57,8 +57,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('modulos', 'ControladorModulos');
+Route::resource('register', 'Auth\RegisterController')->middleware('guest');
 Route::resource('gestioneventos','ControladorEventosFormativos');
-
 Route::resource('gestionusuarios','ControladorUsuarios');
 
 Route::match(array('GET', 'POST'),'constancias', function () {
