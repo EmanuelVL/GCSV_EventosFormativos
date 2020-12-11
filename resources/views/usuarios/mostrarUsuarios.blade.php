@@ -16,7 +16,9 @@
                   <tr>
                     <th>Nombre</th>
                     <th>Email</th>
+                    <th>Administrador</th>
                     <th>Instancia</th>
+                    <th>Instructor</th>
                     <th>Acciones</th>
 
                   </tr>
@@ -24,10 +26,11 @@
                   <tbody>
                      @foreach ($usuarios as $usuario)
                 <tr>
-
                     <td>{{$usuario->nombreUsuario.' '.$usuario->apellidoUsuario}}</td>
                     <td>{{$usuario->correo}}</td>
+                    <td>{{$usuario->esAdmin}}</td>
                     <td>{{$usuario->esInstancia}}</td>
+                    <td>{{$usuario->esInstructor}}</td>
                     <td style="width:150px">
                         <div class="d-flex">
                             <div class="col-lg-6 col-md-6 flex-fill">

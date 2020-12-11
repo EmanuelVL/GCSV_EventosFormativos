@@ -13,7 +13,7 @@ class Usuario extends Authenticatable
     public $timestamps = false;
     protected $table='usuario';
     protected $primaryKey = 'idUsuario';
-    protected $fillable =['nombreUsuario','apellidoUsuario','correo','password','esInstancia'];
+    protected $fillable =['nombreUsuario','apellidoUsuario','correo','password','esInstancia', 'esInstructor', 'esAdmin'];
     //protected $hidden = ['password', 'remember_token',];
 
 

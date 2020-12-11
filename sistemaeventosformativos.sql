@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 10, 2020 at 04:34 AM
+-- Generation Time: Dec 11, 2020 at 07:07 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db133`
+-- Database: `sistemaeventosformativos`
 --
 
 DELIMITER $$
@@ -265,6 +265,7 @@ CREATE TABLE `usuario` (
   `correo` varchar(50) NOT NULL,
   `password` varchar(40) NOT NULL,
   `esInstancia` tinyint(1) NOT NULL DEFAULT '0',
+  `esInstructor` tinyint(1) NOT NULL DEFAULT '0',
   `esAdmin` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -272,8 +273,8 @@ CREATE TABLE `usuario` (
 -- Dumping data for table `usuario`
 --
 
-INSERT INTO `usuario` (`idUsuario`, `nombreUsuario`, `apellidoUsuario`, `correo`, `password`, `esInstancia`, `esAdmin`) VALUES
-(4, 'jesuis', 'carmona', 'jesus@jesus.com', '123', 0, 0);
+INSERT INTO `usuario` (`idUsuario`, `nombreUsuario`, `apellidoUsuario`, `correo`, `password`, `esInstancia`, `esInstructor`, `esAdmin`) VALUES
+(4, 'jesuis', 'carmona', 'jesus@jesus.com', '123', 1, 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -363,7 +364,7 @@ ALTER TABLE `eventoformativo`
 -- AUTO_INCREMENT for table `instructor`
 --
 ALTER TABLE `instructor`
-  MODIFY `idInstructor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idInstructor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `modulo`
@@ -381,7 +382,7 @@ ALTER TABLE `tipoevento`
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
@@ -421,20 +422,6 @@ ALTER TABLE `evaluaciondocente`
 ALTER TABLE `evaluacionprograma`
   ADD CONSTRAINT `evaluacionprograma_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`),
   ADD CONSTRAINT `evaluacionprograma_ibfk_2` FOREIGN KEY (`idEF`) REFERENCES `eventoformativo` (`idEF`);
-
---
--- Constraints for table `eventoformativo`
---
-ALTER TABLE `eventoformativo`
-  ADD CONSTRAINT `FK_Inst` FOREIGN KEY (`idInstructor`) REFERENCES `instructor` (`idInstructor`),
-  ADD CONSTRAINT `FK_Instancia` FOREIGN KEY (`idInstancia`) REFERENCES `usuario` (`idUsuario`),
-  ADD CONSTRAINT `FK_Tipo` FOREIGN KEY (`idTipo`) REFERENCES `tipoevento` (`idTipo`);
-
---
--- Constraints for table `instructor`
---
-ALTER TABLE `instructor`
-  ADD CONSTRAINT `instructor_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

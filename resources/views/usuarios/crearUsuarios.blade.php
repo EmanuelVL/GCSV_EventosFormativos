@@ -43,19 +43,32 @@
               --}}
               -->
 
-              <div class="form-group" {{ $errors->has('instacia') ? 'has-error' : ''}}>
-                <label for="instacia">Es Instancia (0) No y (1) Si</label>
-                <input type="text" class="form-control"  name='esInstancia' placeholder="instacia usuario" required="">
-                {!! $errors->first('instacia','<span class="help-block" style="color:red;">:message</span>')!!}
-              </div>
+                    <!-- Default switch -->
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="administrador" name='esAdmin' value="1">
+                        <label class="custom-control-label" for="administrador">Administrador</label>
+                        {!! $errors->first('administrador','<span class="help-block" style="color:red;">:message</span>')!!}
+                    </div>
 
-              <div class="form-group" {{ $errors->has('instructor') ? 'has-error' : ''}}>
-                <center><label for="instructor">Instructor</label></center>
-                <input type="checkbox" size="10px" class="form-control"  name='instructor' placeholder="instacia usuario" value="1">
-                {!! $errors->first('instructor','<span class="help-block" style="color:red;">:message</span>')!!}
-              </div>
+                    <!-- Default switch -->
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="instancia" name='esInstancia' value="1">
+                        <label class="custom-control-label" for="instancia">Instancia</label>
+                        {!! $errors->first('instancia','<span class="help-block" style="color:red;">:message</span>')!!}
+                    </div>
 
-              <button type="submit" class="btn pretty-btn" style="float: left; background-color:green; color:white">Crear Usuario</button>
+                    <!-- Default switch -->
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="instructor" name='esInstructor' value="1">
+                        <label class="custom-control-label" for="instructor">Instructor</label>
+                        {!! $errors->first('instructor','<span class="help-block" style="color:red;">:message</span>')!!}
+                    </div>
+
+              <div class="form-group row mb-4">
+                    <div class="col-md-6 offset-md-4">
+                        <button type="submit" class="btn pretty-btn" style="float:right; background-color:green; color:white">Crear Usuario</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

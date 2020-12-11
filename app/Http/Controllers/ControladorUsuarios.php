@@ -45,6 +45,8 @@ class ControladorUsuarios extends Controller
         $usuario->correo = $request->input('correo');
         $usuario->password = $request->input('password');
         $usuario->esInstancia = $request->input('esInstancia');
+        $usuario->esInstructor = $request->input('esInstructor');
+        $usuario->esAdmin = $request->input('esAdmin');
 
         /*
         $password_confirm = $request->input('password_confirm');
@@ -66,16 +68,35 @@ class ControladorUsuarios extends Controller
             }
             */
 
+            if($request->esAdmin != 1){
+            $usuario->esAdmin = 0;
+        }
+        else{
+            $usuario->esAdmin = 1;
+        }
+
+        if($request->esInstancia != 1){
+            $usuario->esInstancia = 0;
+        }
+        else{
+            $usuario->esInstancia = 1;
+        }
+
+        if($request->esInstructor != 1){
+            $usuario->esInstructor = 0;
+        }
+        else{
+            $usuario->esInstructor = 1;
+        }
+
             $usuario->save();
 
-            $instructor = $request->input('instructor');
-
-            if($instructor == 1){
+            if($usuario->esInstructor == 1){
                 $instructor = new Instructor();
 
-            $instructor->idUsuario = $usuario->idUsuario;
+                $instructor->idUsuario = $usuario->idUsuario;
 
-            $instructor->save();
+                $instructor->save();
         }
 
         return redirect()->route('gestionusuarios.index')->with('success','Usuario Creado satisfactoriamente.');
@@ -120,6 +141,27 @@ class ControladorUsuarios extends Controller
         $usuario->apellidoUsuario = $request->apellidoUsuario;
         $usuario->correo = $request->correo;
         $usuario->password = $request->password;
+
+        if($request->esAdmin != 1){
+            $usuario->esAdmin = 0;
+        }
+        else{
+            $usuario->esAdmin = 1;
+        }
+
+        if($request->esInstancia != 1){
+            $usuario->esInstancia = 0;
+        }
+        else{
+            $usuario->esInstancia = 1;
+        }
+
+        if($request->esInstructor != 1){
+            $usuario->esInstructor = 0;
+        }
+        else{
+            $usuario->esInstructor = 1;
+        }
 
         /*
         $password_confirm = $request->input('password_confirm');

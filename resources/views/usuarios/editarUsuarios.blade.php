@@ -39,6 +39,54 @@
                     </div>
                 </div>
 
+                @if($usuario->esAdmin != 1)
+                    <!-- Default switch -->
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="administrador" name='esAdmin' value="1">
+                        <label class="custom-control-label" for="administrador">Administrador</label>
+                        {!! $errors->first('administrador','<span class="help-block" style="color:red;">:message</span>')!!}
+                    </div>
+                @else
+                    <!-- Default switch -->
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="administrador" checked name='esAdmin' value="1">
+                        <label class="custom-control-label" for="administrador">Administrador</label>
+                        {!! $errors->first('administrador','<span class="help-block" style="color:red;">:message</span>')!!}
+                    </div>
+                @endif
+
+                @if($usuario->esInstancia != 1)
+                    <!-- Default switch -->
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="instancia" name='esInstancia' value="1">
+                        <label class="custom-control-label" for="instancia">Instancia</label>
+                        {!! $errors->first('instancia','<span class="help-block" style="color:red;">:message</span>')!!}
+                    </div>
+                @else
+                    <!-- Default switch -->
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="instancia" checked name='esInstancia' value="1">
+                        <label class="custom-control-label" for="instancia">Instancia</label>
+                        {!! $errors->first('instancia','<span class="help-block" style="color:red;">:message</span>')!!}
+                    </div>
+                @endif
+
+                @if($usuario->esInstructor != 1)
+                    <!-- Default switch -->
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="instructor" name='esInstructor' value="1">
+                        <label class="custom-control-label" for="instructor">Instructor</label>
+                        {!! $errors->first('instructor','<span class="help-block" style="color:red;">:message</span>')!!}
+                    </div>
+                @else
+                    <!-- Default switch -->
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="instructor" checked name='esInstructor' value="1">
+                        <label class="custom-control-label" for="instructor">Instructor</label>
+                        {!! $errors->first('instructor','<span class="help-block" style="color:red;">:message</span>')!!}
+                    </div>
+                @endif
+
                 <!--
                 {{--
                 <div class="form-group row">
