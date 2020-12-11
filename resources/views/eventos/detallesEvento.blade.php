@@ -18,30 +18,37 @@
                 <h5 class="card-title">  <i class="fas fa-globe"></i> Evento: {{$evento->nombreEF}} </h5>
                 
                
-                <div class="card-tools">
-                 
-                            
-                </div>
-              </div>
+
+        
+              
               <div class="card-body table-responsive p-0">
-                <table class="table table-striped table-valign-middle">
-                  <thead>
-                  <center>
+           
+               
+                
+                 
+                <br>
+                <div class="card-tools">
+                  
+                  </div>
+                <div class="card card-primary card-outline" style="text-align: center; opacity:1;">
+                  <tr>
+                    <th>
+                        <div class="card-header">
+                            <h5 class="m-0">Evento: {{$evento->nombreEF}} </h5>
+                            <br>
+                            <center>
                                 
                                 <a type="button" style="color:black ;" class="btn btn-info btn-sm" href="{{route('modulos.show',$evento->idEF)}}">
                                     Ver modulos del evento
                                 </a>
                            
-                </center>
-                  <tr>
-                    <th>
-                        <div class="card-header">
-                            <h5 class="m-0">{{$evento->nombreEF}} </h5>
+                          </center>
                         </div>
-                        
+                       
                     </th>
                     
                   </tr>
+                 
                   <tr>
                     <th>
                     <div class="card-header">
@@ -71,17 +78,18 @@
                    
 
                   </tr>
-
-
+                  </div>
+                  
                   <tr>
                     <th>
                     <div class="card-header">
                             <h5 class="m-0">Instructor: {{$evento->idInstructor}} </h5>
                         </div>
                     </th>
-                   
+                    <div class="card card-primary card-outline" style="text-align: center; opacity:1;">
 
                   </tr>
+                  </div>
                   <tr>
                     <th>
                     <div class="card-header">
@@ -107,7 +115,7 @@
                         </div>
                         </th>
                   </tr>
-
+                  
                   <tr>
                     <th>
                         <div class="card-header">
@@ -122,6 +130,7 @@
                         </div>
                         </th>
                   </tr>
+                  <div class="card card-primary card-outline" style="text-align: center; opacity:1;">
                   <tr>
                     <th>
                         <div class="card-header">
@@ -152,15 +161,18 @@
                         </div>
                         </th>
                   </tr>
-                  </thead>
                  
-                </table>
+            
 
             </div>
-          
+            <div class="card card-primary card-outline" style="text-align: center; opacity:1;">
+                      
+                      
+                      </div>
             
             </div>
 </div>
 
 
 @stop
+
