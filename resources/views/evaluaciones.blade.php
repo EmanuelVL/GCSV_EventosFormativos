@@ -24,7 +24,7 @@ table.center {
     $constancia4 = new Evaluacion();
     $constancia5 = new Evaluacion();
 
-    $idUsuario = 3;
+    $idUsuario = auth()->user()->idUsuario;;
 
     $listaEFTerminadosParticipante = $evaluacion1->listaEventosTerminadosParticipante($idUsuario);
     $listaEFTerminadosInstructor = $evaluacion2->listaEventosTerminadosInstructor($idUsuario);
