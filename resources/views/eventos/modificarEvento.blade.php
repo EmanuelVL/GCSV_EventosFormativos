@@ -23,7 +23,16 @@
                 <textarea rows="4" class='form-control' cols="50" required name='descripcionEvento'  >{{$evento->descripcion}}</textarea>
                 {!! $errors->first('descripcionEvento','<span class="help-block" style="color:red;">:message</span>')!!}
               </div>
-                
+              @if (Session::has('message'))
+                            <div class="alert alert-warning">{{ Session::get('message') }}</div>
+                        @endif
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                @foreach ($errors->all() as $error)
+                                    {{$error}}
+                                @endforeach
+                            </div> 
+                        @endif
 
                 <div class="form-group" {{ $errors->has('fechaInicio') ? 'has-error' : ''}}>
                   <label for="exampleInputPassword1" ><strong>Fecha de inicio</strong></label>
