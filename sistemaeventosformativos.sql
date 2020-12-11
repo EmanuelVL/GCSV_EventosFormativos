@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Dec 11, 2020 at 07:07 AM
--- Server version: 5.7.24
--- PHP Version: 7.2.19
+-- Servidor: localhost
+-- Tiempo de generación: 11-12-2020 a las 17:25:12
+-- Versión del servidor: 5.7.24
+-- Versión de PHP: 7.2.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,12 +18,12 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sistemaeventosformativos`
+-- Base de datos: `sistemaeventosformativos`
 --
 
 DELIMITER $$
 --
--- Procedures
+-- Procedimientos
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `autoevalRealizada` (IN `idEF` INT, IN `idUsuario` INT)  NO SQL
 SELECT COUNT(*) AS autoeval FROM autoevaluacion
@@ -77,7 +76,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `autoevaluacion`
+-- Estructura de tabla para la tabla `autoevaluacion`
 --
 
 CREATE TABLE `autoevaluacion` (
@@ -90,10 +89,18 @@ CREATE TABLE `autoevaluacion` (
   `r5` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `autoevaluacion`
+--
+
+INSERT INTO `autoevaluacion` (`idUsuario`, `idEF`, `r1`, `r2`, `r3`, `r4`, `r5`) VALUES
+(1, 1, '1', '1', '1', '1', '1'),
+(3, 2, '1', '1', '1', '1', '1');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detalleeventomodulo`
+-- Estructura de tabla para la tabla `detalleeventomodulo`
 --
 
 CREATE TABLE `detalleeventomodulo` (
@@ -104,19 +111,30 @@ CREATE TABLE `detalleeventomodulo` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detalleeventoparticipante`
+-- Estructura de tabla para la tabla `detalleeventoparticipante`
 --
 
 CREATE TABLE `detalleeventoparticipante` (
   `idEF` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
-  `aprobado` tinyint(1) NOT NULL DEFAULT '0'
+  `aprobado` tinyint(1) NOT NULL DEFAULT '0',
+  `calificacion` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `detalleeventoparticipante`
+--
+
+INSERT INTO `detalleeventoparticipante` (`idEF`, `idUsuario`, `aprobado`, `calificacion`) VALUES
+(1, 1, 0, 20),
+(2, 1, 0, 5),
+(2, 3, 0, 0),
+(2, 4, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `evaluaciondocente`
+-- Estructura de tabla para la tabla `evaluaciondocente`
 --
 
 CREATE TABLE `evaluaciondocente` (
@@ -129,10 +147,18 @@ CREATE TABLE `evaluaciondocente` (
   `r5` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `evaluaciondocente`
+--
+
+INSERT INTO `evaluaciondocente` (`idUsuario`, `idEF`, `r1`, `r2`, `r3`, `r4`, `r5`) VALUES
+(1, 1, '1', '1', '1', '1', '1'),
+(3, 2, '1', '1', '1', '1', '1');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `evaluacionprograma`
+-- Estructura de tabla para la tabla `evaluacionprograma`
 --
 
 CREATE TABLE `evaluacionprograma` (
@@ -145,10 +171,18 @@ CREATE TABLE `evaluacionprograma` (
   `r5` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `evaluacionprograma`
+--
+
+INSERT INTO `evaluacionprograma` (`idUsuario`, `idEF`, `r1`, `r2`, `r3`, `r4`, `r5`) VALUES
+(1, 1, '1', '1', '1', '1', '1'),
+(3, 2, '1', '1', '1', '1', '1');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `eventoformativo`
+-- Estructura de tabla para la tabla `eventoformativo`
 --
 
 CREATE TABLE `eventoformativo` (
@@ -172,17 +206,19 @@ CREATE TABLE `eventoformativo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `eventoformativo`
+-- Volcado de datos para la tabla `eventoformativo`
 --
 
 INSERT INTO `eventoformativo` (`idEF`, `nombreEF`, `descripcion`, `fechaInicio`, `fechaFinal`, `modalidad`, `idTipo`, `idInstructor`, `idInstancia`, `diseñoInstruccional`, `utilidadOportunidad`, `requisitosParticipacion`, `requisitosAcreditacion`, `condicionesOperativas`, `cuota`, `duracion`, `evalParticipantes`) VALUES
+(1, 'la wea', 'asd', '2020-12-01', '2020-12-08', 'precencial', 2, 1, 4, '123', '12312', '123', '123', '123', '0.0', 300, 0),
+(2, 'fome weon', '123', '2020-12-02', '2020-12-10', 'precencial', 2, 3, 4, '123', '123', '123', '123', '123', '0.0', 300, 0),
 (12, 'fgdgdgdgsdg', 'fdgffggggggggggggggggggggggggggggggggggggggggggggggggggg', '2020-12-03', '2020-12-03', 'presencial', 2, 2, 4, 'bfgb', NULL, 'bfg', 'bfg', 'gbf', '0.0', 120, 0),
 (13, 'fgdgdgdgsdg32', 'dsfdfsdfdfdfdsfdsfdsfdsfdsfdsfdsfdsfsdf', '2020-12-11', '2020-12-30', 'online', 2, 2, 4, 'm', 'mn', 'fg', 'fg', 'fg', '120.0', 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `instructor`
+-- Estructura de tabla para la tabla `instructor`
 --
 
 CREATE TABLE `instructor` (
@@ -195,16 +231,18 @@ CREATE TABLE `instructor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `instructor`
+-- Volcado de datos para la tabla `instructor`
 --
 
 INSERT INTO `instructor` (`idInstructor`, `idUsuario`, `calidadProfesional`, `calidadAcademica`, `curriculumSintetico`, `experiencia`) VALUES
-(2, 4, 'gfhfhfhf', 'fghfg', 'ghfgh', 'fghfgh');
+(1, 3, '123', '213', '123', '123'),
+(2, 4, 'gfhfhfhf', 'fghfg', 'ghfgh', 'fghfgh'),
+(3, 5, '123', '123', '123', '123');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `modulo`
+-- Estructura de tabla para la tabla `modulo`
 --
 
 CREATE TABLE `modulo` (
@@ -216,7 +254,7 @@ CREATE TABLE `modulo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `modulo`
+-- Volcado de datos para la tabla `modulo`
 --
 
 INSERT INTO `modulo` (`idModulo`, `idEF`, `nombreModulo`, `contenidoModulo`, `duracionModulo`) VALUES
@@ -232,7 +270,7 @@ INSERT INTO `modulo` (`idModulo`, `idEF`, `nombreModulo`, `contenidoModulo`, `du
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tipoevento`
+-- Estructura de tabla para la tabla `tipoevento`
 --
 
 CREATE TABLE `tipoevento` (
@@ -243,7 +281,7 @@ CREATE TABLE `tipoevento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tipoevento`
+-- Volcado de datos para la tabla `tipoevento`
 --
 
 INSERT INTO `tipoevento` (`idTipo`, `nombreTipo`, `minModulos`, `minHoras`) VALUES
@@ -255,7 +293,7 @@ INSERT INTO `tipoevento` (`idTipo`, `nombreTipo`, `minModulos`, `minHoras`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuario`
+-- Estructura de tabla para la tabla `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -270,53 +308,57 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `usuario`
+-- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`idUsuario`, `nombreUsuario`, `apellidoUsuario`, `correo`, `password`, `esInstancia`, `esInstructor`, `esAdmin`) VALUES
-(4, 'jesuis', 'carmona', 'jesus@jesus.com', '123', 1, 1, 1);
+(1, 'jaime', 'mausan', 'mausan@gmail.com', '123', 0, 0, 0),
+(2, 'moises', 'jebus', 'dios@dios.com', '123', 0, 0, 0),
+(3, 'maistro', 'longaniza', 'gg@izi.com', '123', 0, 1, 0),
+(4, 'jesuis', 'carmona', 'jesus@jesus.com', '123', 1, 1, 1),
+(5, 'profe', 'jirafales', 'mamon@shi.com', '123', 0, 1, 0);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `autoevaluacion`
+-- Indices de la tabla `autoevaluacion`
 --
 ALTER TABLE `autoevaluacion`
   ADD PRIMARY KEY (`idUsuario`,`idEF`),
   ADD KEY `idEF` (`idEF`);
 
 --
--- Indexes for table `detalleeventomodulo`
+-- Indices de la tabla `detalleeventomodulo`
 --
 ALTER TABLE `detalleeventomodulo`
   ADD PRIMARY KEY (`idEF`,`idModulo`),
   ADD KEY `idModulo` (`idModulo`);
 
 --
--- Indexes for table `detalleeventoparticipante`
+-- Indices de la tabla `detalleeventoparticipante`
 --
 ALTER TABLE `detalleeventoparticipante`
   ADD PRIMARY KEY (`idEF`,`idUsuario`),
   ADD KEY `idUsuario` (`idUsuario`);
 
 --
--- Indexes for table `evaluaciondocente`
+-- Indices de la tabla `evaluaciondocente`
 --
 ALTER TABLE `evaluaciondocente`
   ADD PRIMARY KEY (`idUsuario`,`idEF`),
   ADD KEY `idEF` (`idEF`);
 
 --
--- Indexes for table `evaluacionprograma`
+-- Indices de la tabla `evaluacionprograma`
 --
 ALTER TABLE `evaluacionprograma`
   ADD PRIMARY KEY (`idUsuario`,`idEF`),
   ADD KEY `idEF` (`idEF`);
 
 --
--- Indexes for table `eventoformativo`
+-- Indices de la tabla `eventoformativo`
 --
 ALTER TABLE `eventoformativo`
   ADD PRIMARY KEY (`idEF`),
@@ -326,98 +368,98 @@ ALTER TABLE `eventoformativo`
   ADD KEY `FK_Instancia` (`idInstancia`);
 
 --
--- Indexes for table `instructor`
+-- Indices de la tabla `instructor`
 --
 ALTER TABLE `instructor`
   ADD PRIMARY KEY (`idInstructor`),
   ADD KEY `idUsuario` (`idUsuario`);
 
 --
--- Indexes for table `modulo`
+-- Indices de la tabla `modulo`
 --
 ALTER TABLE `modulo`
   ADD PRIMARY KEY (`idModulo`);
 
 --
--- Indexes for table `tipoevento`
+-- Indices de la tabla `tipoevento`
 --
 ALTER TABLE `tipoevento`
   ADD PRIMARY KEY (`idTipo`);
 
 --
--- Indexes for table `usuario`
+-- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`idUsuario`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `eventoformativo`
+-- AUTO_INCREMENT de la tabla `eventoformativo`
 --
 ALTER TABLE `eventoformativo`
   MODIFY `idEF` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `instructor`
+-- AUTO_INCREMENT de la tabla `instructor`
 --
 ALTER TABLE `instructor`
   MODIFY `idInstructor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `modulo`
+-- AUTO_INCREMENT de la tabla `modulo`
 --
 ALTER TABLE `modulo`
   MODIFY `idModulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT for table `tipoevento`
+-- AUTO_INCREMENT de la tabla `tipoevento`
 --
 ALTER TABLE `tipoevento`
   MODIFY `idTipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `usuario`
+-- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `autoevaluacion`
+-- Filtros para la tabla `autoevaluacion`
 --
 ALTER TABLE `autoevaluacion`
   ADD CONSTRAINT `autoevaluacion_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`),
   ADD CONSTRAINT `autoevaluacion_ibfk_2` FOREIGN KEY (`idEF`) REFERENCES `eventoformativo` (`idEF`);
 
 --
--- Constraints for table `detalleeventomodulo`
+-- Filtros para la tabla `detalleeventomodulo`
 --
 ALTER TABLE `detalleeventomodulo`
   ADD CONSTRAINT `detalleeventomodulo_ibfk_1` FOREIGN KEY (`idEF`) REFERENCES `eventoformativo` (`idEF`),
   ADD CONSTRAINT `detalleeventomodulo_ibfk_2` FOREIGN KEY (`idModulo`) REFERENCES `modulo` (`idModulo`);
 
 --
--- Constraints for table `detalleeventoparticipante`
+-- Filtros para la tabla `detalleeventoparticipante`
 --
 ALTER TABLE `detalleeventoparticipante`
   ADD CONSTRAINT `detalleeventoparticipante_ibfk_1` FOREIGN KEY (`idEF`) REFERENCES `eventoformativo` (`idEF`),
   ADD CONSTRAINT `detalleeventoparticipante_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`);
 
 --
--- Constraints for table `evaluaciondocente`
+-- Filtros para la tabla `evaluaciondocente`
 --
 ALTER TABLE `evaluaciondocente`
   ADD CONSTRAINT `evaluaciondocente_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`),
   ADD CONSTRAINT `evaluaciondocente_ibfk_2` FOREIGN KEY (`idEF`) REFERENCES `eventoformativo` (`idEF`);
 
 --
--- Constraints for table `evaluacionprograma`
+-- Filtros para la tabla `evaluacionprograma`
 --
 ALTER TABLE `evaluacionprograma`
   ADD CONSTRAINT `evaluacionprograma_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`),
