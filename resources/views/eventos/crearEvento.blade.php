@@ -22,7 +22,16 @@
                 {!! $errors->first('descripcionEvento','<span class="help-block" style="color:red;">:message</span>')!!}
               </div>
 
-
+              @if (Session::has('message'))
+                            <div class="alert alert-warning">{{ Session::get('message') }}</div>
+                        @endif
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                @foreach ($errors->all() as $error)
+                                    {{$error}}
+                                @endforeach
+                            </div> 
+                        @endif
               <div class="form-group " {{ $errors->has('fechaInicio') ? 'has-error' : ''}}>
                 <label for="exampleInputPassword1">Fecha de inicio</label>
                 <input type="date"  class='form-control' required name='fechaInicio'>
