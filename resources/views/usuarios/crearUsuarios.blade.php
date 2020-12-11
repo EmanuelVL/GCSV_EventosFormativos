@@ -29,19 +29,15 @@
 
               <div class="form-group " {{ $errors->has('password') ? 'has-error' : ''}}>
                 <label for="password">Contraseña</label>
-                <input type="password" name="password" rows="4" class='form-control' cols="50" name='password' required=""></input>
+                <input id="password" type="password" name="password" rows="4" class='form-control' cols="50" name='password' required=""></input>
                 {!! $errors->first('password','<span class="help-block" style="color:red;">:message</span>')!!}
               </div>
 
-              <!--
-                {{--
               <div class="form-group " {{ $errors->has('password-confirm') ? 'has-error' : ''}}>
                 <label for="password-confirm">Confirmar Contraseña</label>
                 <input id="password-confirm" type="password" name="password" rows="4" class='form-control' cols="50" name='password' name="password_confirmation" required=""></input>
                 {!! $errors->first('password-confirm','<span class="help-block" style="color:red;">:message</span>')!!}
               </div>
-              --}}
-              -->
 
                     <!-- Default switch -->
                     <div class="custom-control custom-switch">
@@ -72,4 +68,19 @@
             </form>
         </div>
     </div>
+    <script>
+        var password, password2;
+
+        password = document.getElementById('password');
+        password2 = document.getElementById('password-confirm');
+
+        password.onchange = password2.onkeyup = passwordMatch;
+
+        function passwordMatch() {
+            if(password.value !== password2.value)
+                password2.setCustomValidity('Las contraseñas no coinciden.');
+            else
+                password2.setCustomValidity('');
+        }
+    </script>
 @endsection

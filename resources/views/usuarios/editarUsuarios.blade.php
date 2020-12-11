@@ -39,6 +39,13 @@
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirmar Contraseña') }}</label>
+                    <div class="col-md-6">
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" value="{{$usuario->password}}">
+                    </div>
+                </div>
+
                 @if($usuario->esAdmin != 1)
                     <!-- Default switch -->
                     <div class="custom-control custom-switch">
@@ -87,17 +94,6 @@
                     </div>
                 @endif
 
-                <!--
-                {{--
-                <div class="form-group row">
-                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirmar Contraseña') }}</label>
-                    <div class="col-md-6">
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" value="{{$usuario->password}}">
-                    </div>
-                </div>
-                --}}
-                -->
-
                 <div class="form-group row mb-4">
                     <div class="col-md-6 offset-md-4">
                         <button type="submit" class="btn btn-info" style="float:right">
@@ -109,4 +105,19 @@
             </form>
         </div>
     </div>
+    <script>
+        var password, password2;
+
+        password = document.getElementById('password');
+        password2 = document.getElementById('password-confirm');
+
+        password.onchange = password2.onkeyup = passwordMatch;
+
+        function passwordMatch() {
+            if(password.value !== password2.value)
+                password2.setCustomValidity('Las contraseñas no coinciden.');
+            else
+                password2.setCustomValidity('');
+        }
+    </script>
 @stop

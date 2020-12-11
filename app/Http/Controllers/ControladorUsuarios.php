@@ -140,7 +140,7 @@ class ControladorUsuarios extends Controller
         $usuario->nombreUsuario = $request->nombreUsuario;
         $usuario->apellidoUsuario = $request->apellidoUsuario;
         $usuario->correo = $request->correo;
-        $usuario->password = $request->password;
+        $usuario->password = bcrypt($request->password);
 
         if($request->esAdmin != 1){
             $usuario->esAdmin = 0;
