@@ -58,6 +58,8 @@ class ControladorModulos extends Controller
     public function destroy($idEF)
     {
         $modulo = Modulo::where('idModulo', $idEF)->firstOrFail();
+        $evento = EventoFormativo::where('idEF', $modulo ->idEF)->firstOrFail();
+        $evento->duracion = $evento->duracion - $modulo ->duracionModulo;
         $modulo-> delete();
         return back();
     }
@@ -76,6 +78,9 @@ class ControladorModulos extends Controller
     {
         
             $modulo = Modulo::where('idModulo', $idMod)->firstOrFail();
+            $evento = EventoFormativo::where('idEF', $modulo ->idEF)->firstOrFail();
+            $evento->duracion = $evento->duracion - $modulo ->duracionModulo;
+            $evento->duracion = $evento->duracion + $request->input('duracion');
             $modulo ->idEF = $modulo ->idEF;
             $modulo ->nombreModulo = $request->input('nombreModulo');
             $modulo ->contenidoModulo = $request->input('contenidoModulo');
