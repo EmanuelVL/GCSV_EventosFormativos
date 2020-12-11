@@ -15,7 +15,7 @@ table.center {
 </style>
 <?php
     require ("C:/laragon/www/SistemaEventosFormativos/database/factories/herramientasEvaluaciones.php");
-    $idUsuario = 3;
+    $idUsuario = auth()->user()->idUsuario;
     
     if ($_SERVER["REQUEST_METHOD"] == "GET"){
         $idEFP = $_GET['idEFP'];
@@ -54,7 +54,7 @@ table.center {
                             </div>
                             <div class="card-body">
                                 <div class="cuadro">
-                                    1.-Pregunta 1                      
+                                    1.-En un rango del 1 al 10, ¿Como consideras tu mejora en la materia impartida?                      
                                     <table style="margin-left: auto;margin-right: auto;">
                                         <tr>
                                             <td style='padding:0 15px 0 15px;'>1 <input type='radio' id='seleccion' name='AP1' value=1 required></td>
@@ -71,7 +71,7 @@ table.center {
                                     </table>
                                 </div>
                                 <div class="cuadro">
-                                    2.-Pregunta 2                      
+                                    2.-En un rango del 1 al 10, ¿Que calificación consideras que mereces?                     
                                     <table style="margin-left: auto;margin-right: auto;">
                                         <tr>
                                             <td style='padding:0 15px 0 15px;'>1 <input type='radio' id='seleccion' name='AP2' value=1 required></td>
@@ -88,7 +88,7 @@ table.center {
                                     </table>
                                 </div>
                                 <div class="cuadro">
-                                    3.-Pregunta 3                      
+                                    3.-En un rango del 1 al 10, ¿Como fue tu desempeño durante la clase?       
                                     <table style="margin-left: auto;margin-right: auto;">
                                         <tr>
                                             <td style='padding:0 15px 0 15px;'>1 <input type='radio' id='seleccion' name='AP3' value=1 required></td>
@@ -105,7 +105,7 @@ table.center {
                                     </table>
                                 </div>
                                 <div class="cuadro">
-                                    4.-Pregunta 4                      
+                                    4.-En un rango del 1 al 10, ¿Que tanto consideras que tu conocimiento general sobre el tema ha aumentado?                  
                                     <table style="margin-left: auto;margin-right: auto;">
                                         <tr>
                                             <td style='padding:0 15px 0 15px;'>1 <input type='radio' id='seleccion' name='AP4' value=1 required></td>
@@ -122,7 +122,7 @@ table.center {
                                     </table>
                                 </div>
                                 <div class="cuadro">
-                                    5.-Pregunta 5                      
+                                    5.-En un rango del 1 al 10, ¿Como calificarias tu comportamiento durante la clase?                   
                                     <table style="margin-left: auto;margin-right: auto;">
                                         <tr>
                                             <td style='padding:0 15px 0 15px;'>1 <input type='radio' id='seleccion' name='AP5' value=1 required></td>
@@ -152,7 +152,7 @@ table.center {
                             </div>
                             <div class="card-body">
                                 <div class="cuadro">
-                                    1.-Pregunta 1                      
+                                    1.-En un rango del 1 al 10, ¿Como consideras el desempeño general del docente?                      
                                     <table style="margin-left: auto;margin-right: auto;">
                                         <tr>
                                             <td style='padding:0 15px 0 15px;'>1 <input type='radio' id='seleccion' name='DP1' value=1 required></td>
@@ -169,7 +169,7 @@ table.center {
                                     </table>
                                 </div>
                                 <div class="cuadro">
-                                    2.-Pregunta 2                      
+                                    2.-En un rango del 1 al 10, ¿Como consideras el conocimiento sobre la materia del docente?                     
                                     <table style="margin-left: auto;margin-right: auto;">
                                         <tr>
                                             <td style='padding:0 15px 0 15px;'>1 <input type='radio' id='seleccion' name='DP2' value=1 required></td>
@@ -186,7 +186,7 @@ table.center {
                                     </table>
                                 </div>
                                 <div class="cuadro">
-                                    3.-Pregunta 3                      
+                                    3.-En un rango del 1 al 10, ¿Como consideras su comportamiento hacia los participantes?                     
                                     <table style="margin-left: auto;margin-right: auto;">
                                         <tr>
                                             <td style='padding:0 15px 0 15px;'>1 <input type='radio' id='seleccion' name='DP3' value=1 required></td>
@@ -203,7 +203,7 @@ table.center {
                                     </table>
                                 </div>
                                 <div class="cuadro">
-                                    4.-Pregunta 4                      
+                                    4.-En un rango del 1 al 10, ¿Como consideras el uso de las tecnologias por parte del profesor?                     
                                     <table style="margin-left: auto;margin-right: auto;">
                                         <tr>
                                             <td style='padding:0 15px 0 15px;'>1 <input type='radio' id='seleccion' name='DP4' value=1 required></td>
@@ -220,7 +220,7 @@ table.center {
                                     </table>
                                 </div>
                                 <div class="cuadro">
-                                    5.-Pregunta 5                      
+                                    5.-En un rango del 1 al 10, ¿Como consideras el uso del material por parte del profesor a lo largo del curso?                  
                                     <table style="margin-left: auto;margin-right: auto;">
                                         <tr>
                                             <td style='padding:0 15px 0 15px;'>1 <input type='radio' id='seleccion' name='DP5' value=1 required></td>
@@ -249,7 +249,7 @@ table.center {
                             </div>
                             <div class="card-body">
                                 <div class="cuadro">
-                                    1.-Pregunta 1                      
+                                    1.-En un rango del 1 al 10, ¿Que tan dificil consideras que fue la materia?                   
                                     <table style="margin-left: auto;margin-right: auto;">
                                         <tr>
                                             <td style='padding:0 15px 0 15px;'>1 <input type='radio' id='seleccion' name='PP1' value=1 required></td>
@@ -266,7 +266,7 @@ table.center {
                                     </table>
                                 </div>
                                 <div class="cuadro">
-                                    2.-Pregunta 2                      
+                                    2.-En un rango del 1 al 10, ¿Que tan bien enlazados fueron los temas del curso?                  
                                     <table style="margin-left: auto;margin-right: auto;">
                                         <tr>
                                             <td style='padding:0 15px 0 15px;'>1 <input type='radio' id='seleccion' name='PP2' value=1 required></td>
@@ -283,7 +283,7 @@ table.center {
                                     </table>
                                 </div>
                                 <div class="cuadro">
-                                    3.-Pregunta 3                      
+                                    3.-En un rango del 1 al 10, ¿Que tan util consideras que te fue el curso?                     
                                     <table style="margin-left: auto;margin-right: auto;">
                                         <tr>
                                             <td style='padding:0 15px 0 15px;'>1 <input type='radio' id='seleccion' name='PP3' value=1 required></td>
@@ -300,7 +300,7 @@ table.center {
                                     </table>
                                 </div>
                                 <div class="cuadro">
-                                    4.-Pregunta 4                      
+                                    4.-En un rango del 1 al 10, ¿Que tan pesado se te hizo el material del curso?                      
                                     <table style="margin-left: auto;margin-right: auto;">
                                         <tr>
                                             <td style='padding:0 15px 0 15px;'>1 <input type='radio' id='seleccion' name='PP4' value=1 required></td>
@@ -317,7 +317,7 @@ table.center {
                                     </table>
                                 </div>
                                 <div class="cuadro">
-                                    5.-Pregunta 5                      
+                                    5.-En un rango del 1 al 10, ¿Que tan util consideras que fue la clase para ti?                      
                                     <table style="margin-left: auto;margin-right: auto;">
                                         <tr>
                                             <td style='padding:0 15px 0 15px;'>1 <input type='radio' id='seleccion' name='PP5' value=1 required></td>
