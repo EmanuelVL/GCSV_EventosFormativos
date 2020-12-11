@@ -9,7 +9,7 @@ table.center {
 </style>
 <?php
     require ("C:/laragon/www/SistemaEventosFormativos/database/factories/herramientasEvaluaciones.php");
-    $idUsuario = 2;
+    $idUsuario = 3;
     
     if ($_SERVER["REQUEST_METHOD"] == "GET"){
         $idEFI = $_GET['idEFI'];
@@ -19,6 +19,7 @@ table.center {
     }
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $idEFI = $_POST['idEFI'];
+        header("Refresh:0");  
         #$idUsuario = $_GET['idU'];
         
 
@@ -26,7 +27,10 @@ table.center {
 
     $evaluacion1 = new Evaluacion();
     $listaParticipantes = $evaluacion1->participantes($idEFI);
-    $listaEvento = $evaluacion1->participantesEF($idEFI);;
+    $listaEvento = $evaluacion1->participantesEF($idEFI);
+
+
+    #$key = array_search('100', array_column($userdb, 'uid'));
 
 ?>
 
@@ -36,6 +40,8 @@ table.center {
             <div class="card-body" >
                 <form method = "POST"> 
                 @csrf 
+                <th><input type="hidden" name="apr"  value=0 ></input></th> 
+                <th><input type="hidden" name="rep"  value=0 ></input></th> 
                     <div class="container">
 
                         <!-- Page Heading -->
@@ -45,7 +51,9 @@ table.center {
                    
                         <!-- Page Heading -->
                         
-                        
+                        <?php  
+                        if($listaParticipantes != null){
+                        ?>
                         <div class='card card-primary card-outline' style='text-align: center; opacity:1;'>
                             <div class='card-header'>
                                 <h5 class='m-0'>Participantes del evento: </h5>
@@ -58,8 +66,10 @@ table.center {
                                                 
                                                 <th style='padding:0 30px 0 30px;'>Nombre</th>
                                                 <th style='padding:0 30px 0 30px;'>Apellido</th>
-                                                <td style='padding:0 30px 0 30px;'>Aprobar</td>
-                                                <td style='padding:0 30px 0 30px;'>Aprobado</td>
+                                                <th style='padding:0 30px 0 30px;'>Aprobar</th>
+                                                <th style='padding:0 30px 0 30px;'>Reprobar</th>
+                                                <th style='padding:0 30px 0 30px;'>Aprobado</th>
+                                                <th style='padding:0 15px 0 15px;'>Calificación</th>
                                                 
                                                 
                                             </tr>
@@ -73,13 +83,18 @@ table.center {
 
                                          echo "<td><button type='submit' onclick='guardarAprovados()' name='apr'  value=" . $elemento['idUsuario'] . " >   </td>";
 
+                                         echo "<td><button type='submit' onclick='guardarReprobados()' name='rep'  value=" . $elemento['idUsuario'] . " >   </td>";
+
+                                         
+
                                          if($listaEvento[$index]['aprobado']){
                                             echo "<th style='padding:0 30px 0 30px;'>SI</th>";
                                          }else{
                                             echo "<th style='padding:0 30px 0 30px;'>NO</th>";
                                          }
                                          
-                                        
+                                         echo "<td><input type='text' style='text-align:center;'  id='calif[]' name='calif[]' value=" . $listaEvento[$index]['calificacion'] ."> </td>";
+
                                          echo "</tr>";
                                         
 
@@ -91,7 +106,19 @@ table.center {
                                 
                             </div>
                         </div>
-                       
+                        <?php  
+                        }else{
+                        echo "<div class='card card-primary card-outline' style='text-align: center; opacity:1;'>";
+                          echo "<div class='card-header'>";
+                            echo "<h5 class='m-0'>Lista de alumnos a evaluar: </h5>";
+                          echo "</div>";
+                          echo "<div class='card-body'>";
+                            echo "<h5 class='m-0'>No hay alumnos inscritos en este evento formativo. </h5>";
+                            
+                          echo "</div>";
+                        echo "</div>";
+                        }
+                        ?>
 
                     
                    
@@ -101,18 +128,25 @@ table.center {
                         
                         
                   
-
+                        
                         <!-- /.row -->
                         <div class="cuadro"> 
                             <table style="margin-left: auto;margin-right: auto;">
                                 <tr>
                                     <th><a href='/evaluaciones' class='btn btn-primary'>volver</a></th>
+                                    <?php  
+                                    if($listaParticipantes != null){
+                                    ?>
                                     <th><input type="hidden" name="idEFI"  value=<?php echo $idEFI ?> ></input></th> 
-                                    <th><button onclick="guardarAprovados()" name="idEFI" class='btn btn-primary' value=<?php echo $idEFI ?> >Guardar</button></th> 
+                                    <th><button type="submit" onclick="guardarAprovados()" name="idEFI" class='btn btn-primary' value=<?php echo $idEFI ?> >Guardar</button></th> 
+                                    <?php  
+                                    }
+                                    ?>
                                 </tr>
                             </table>
-                            <p id="demo"></p>
+
                         </div>
+                        
                     </div>
                 </form>
                 
@@ -133,13 +167,64 @@ table.center {
                         $evaluacion = new Evaluacion();
                         $apr = $_POST['apr'];
                         $idEFI = $_POST['idEFI'];
+
+
                    
-                        $base = $evaluacion->guardarEvaluacionParticipante($idEFI,$apr);
+                        $base = $evaluacion->guardarEvaluacionParticipante($idEFI,$apr,1);
                         
                     }
-                        
+
+                    
+                       
                     ?>    
+                    
           
+        }
+
+        function guardarReprobados() {
+                    
+                    <?php  
+                    
+                    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+                        $evaluacion = new Evaluacion();
+                        $rep = $_POST['rep'];
+                        $idEFI = $_POST['idEFI'];
+                   
+                        $base = $evaluacion->guardarEvaluacionParticipante($idEFI,$rep,0);
+                        
+                    }
+
+                    
+                        
+                    ?>   
+                    
+          
+        }
+
+        function guardarCalificacion(){
+            <?php  
+                    
+                    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+                        $cont = 0;
+                        $evaluacion = new Evaluacion();
+                        $idEFI = $_POST['idEFI'];
+                        $calif = $_POST['calif'];
+
+#
+                        foreach($listaEvento as $elemento){
+                            $actualizar = $evaluacion->guardarCalificacionParticipante($idEFI,$elemento['idUsuario'],$calif[$cont]);
+                            $cont++;
+                        }
+                        
+
+                        
+                        
+                    }
+
+
+
+                        #guardarAutoevaluacion($idEFP,$idUsuario,$valores[0],$valores[1],$valores[2],$valores[3],$valores[4]);
+                 ?>
         }
 
        

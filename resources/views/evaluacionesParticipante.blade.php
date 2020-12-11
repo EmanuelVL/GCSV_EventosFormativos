@@ -9,7 +9,7 @@ table.center {
 </style>
 <?php
     require ("C:/laragon/www/SistemaEventosFormativos/database/factories/herramientasEvaluaciones.php");
-    $idUsuario = 2;
+    $idUsuario = 3;
     
     if ($_SERVER["REQUEST_METHOD"] == "GET"){
         $idEFP = $_GET['idEFP'];
@@ -340,7 +340,7 @@ table.center {
                                     <th><button onclick="guardarEvaluacion()" name="idEFP" class='btn btn-primary' value=<?php echo $idEFP ?> >Guardar</button></th> 
                                 </tr>
                             </table>
-                            <p id="demo"></p>
+                            
                         </div>
                     </div>
                 </form>
@@ -373,34 +373,49 @@ table.center {
                     
                     if ($_SERVER["REQUEST_METHOD"] == "POST"){
                         $evaluacion = new Evaluacion();
+                        $idEFP = $_POST['idEFP'];
+                        $actualizar = $evaluacion->cursoParticipante($idUsuario,$idEFP);
+
+                        
                         $P1 = $_POST['AP1'];
                         $P2 = $_POST['AP2'];
                         $P3 = $_POST['AP3'];
                         $P4 = $_POST['AP4'];
                         $P5 = $_POST['AP5'];
-                        $idEFP = $_POST['idEFP'];
-
-                        $base = $evaluacion->guardarAutoevaluacion($idEFP,$idUsuario,$P1,$P2,$P3,$P4,$P5);
+                        
+                        if($actualizar != null){
+                            $base = $evaluacion->actualizarAutoevaluacion($idEFP,$idUsuario,$P1,$P2,$P3,$P4,$P5);
+                        }else{
+                            $base = $evaluacion->guardarAutoevaluacion($idEFP,$idUsuario,$P1,$P2,$P3,$P4,$P5);
+                        }
+                        
                         $P1 = $_POST['DP1'];
                         $P2 = $_POST['DP2'];
                         $P3 = $_POST['DP3'];
                         $P4 = $_POST['DP4'];
                         $P5 = $_POST['DP5'];
 
-                        $base = $evaluacion->guardarEvaluacionDocente($idEFP,$idUsuario,$P1,$P2,$P3,$P4,$P5);
+                        if($actualizar != null){
+                            $base = $evaluacion->actualizarEvaluacionDocente($idEFP,$idUsuario,$P1,$P2,$P3,$P4,$P5);
+                        }else{
+                            $base = $evaluacion->guardarEvaluacionDocente($idEFP,$idUsuario,$P1,$P2,$P3,$P4,$P5);
+                        }
                         $P1 = $_POST['PP1'];
                         $P2 = $_POST['PP2'];
                         $P3 = $_POST['PP3'];
                         $P4 = $_POST['PP4'];
                         $P5 = $_POST['PP5'];
 
-
-                        $base = $evaluacion->guardarEvaluacionPrograma($idEFP,$idUsuario,$P1,$P2,$P3,$P4,$P5);
+                        if($actualizar != null){
+                            $base = $evaluacion->actualizarEvaluacionPrograma($idEFP,$idUsuario,$P1,$P2,$P3,$P4,$P5);
+                        }else{
+                            $base = $evaluacion->guardarEvaluacionPrograma($idEFP,$idUsuario,$P1,$P2,$P3,$P4,$P5);
+                        }
                     }
 
 
                         #guardarAutoevaluacion($idEFP,$idUsuario,$valores[0],$valores[1],$valores[2],$valores[3],$valores[4]);
-                    ?> 
+                 ?>    
                 }
                 
             

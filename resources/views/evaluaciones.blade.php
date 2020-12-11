@@ -18,11 +18,11 @@ table.center {
     $constancia4 = new Evaluacion();
     $constancia5 = new Evaluacion();
 
-    $idUsuario = 2;
+    $idUsuario = 3;
 
     $listaEFTerminadosParticipante = $evaluacion1->listaEventosTerminadosParticipante($idUsuario);
     $listaEFTerminadosInstructor = $evaluacion2->listaEventosTerminadosInstructor($idUsuario);
-
+    #$autoevaluacion = $evaluacion3->cursosParticipante($idUsuario);
     
 
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -80,6 +80,7 @@ table.center {
                                             
                                                 
                                             foreach($listaEFTerminadosParticipante as $elemento){
+
                                                 echo "<tr>";
                                                 echo "<td></td>";
                                                 echo "<td>" . $elemento['nombreEF'] . "</td>";
