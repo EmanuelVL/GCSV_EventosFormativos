@@ -1,10 +1,17 @@
+<?php
+    if(auth()->user()){
+        header('Location: http://sistemaeventosformativos.test/home');
+        die();
+    }
+?>
+
 <!DOCTYPE html>
 
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
- 
+
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -20,7 +27,7 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
- 
+
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
@@ -38,7 +45,7 @@
                                 @foreach ($errors->all() as $error)
                                     {{$error}}
                                 @endforeach
-                            </div> 
+                            </div>
                         @endif
       <p class="login-box-msg">Ingresa tus datos para iniciar sesión.</p>
 
@@ -53,7 +60,7 @@
           </div>
         </div>
 
-             
+
 
         <div class="input-group mb-3">
           <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Ingresar contraseña" required>
@@ -65,7 +72,7 @@
         </div>
         <div class="row">
           <div class="col-8">
-           
+
           </div>
           <!-- /.col -->
           <div class="col-4">
@@ -75,11 +82,11 @@
         </div>
       </form>
 
-      
+
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
-    
+
       </p>
       <p class="mb-0">
         <a href="register" class="text-center">Registrar un nuevo usuario</a>
@@ -98,4 +105,4 @@
 <script src="/adminlte/dist/js/adminlte.min.js"></script>
 
 </body>
-</html>    
+</html>

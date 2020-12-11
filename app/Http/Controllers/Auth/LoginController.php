@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -40,13 +40,14 @@ class LoginController extends Controller
     }
 
     public function login(Request $request){
+
         $credentials = $this->validate(request(), [
             'correo' => 'email|required|string',
             'password' => 'required|string'
         ]);
 
         if(Auth::attempt($credentials)){
-            return redirect('/');
+            return redirect('/home');
         }
 
         return back()->withErrors(['email'=> 'El correo o la contraseña ingresados no son válidas']);

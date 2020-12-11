@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $evento = EventoFormativo::All();
-    return view('welcome',compact('evento'));
+    return view('auth/login',compact('evento'));
 });
 
 Route::get('/home', function () {

@@ -1,3 +1,10 @@
+<?php
+    if(!(auth()->user())){
+        header('Location: http://sistemaeventosformativos.test/');
+        die();
+    }
+?>
+
 <!DOCTYPE html>
 @extends('layout.layout')
 @section('content')
@@ -15,118 +22,125 @@
     $constancia6 = new Constancia();
     $constancia7 = new Constancia();
     $constancia8 = new Constancia();
+    $constancia9 = new Constancia();
 
-    $idUsuario = 1; // Sesión
+    $idUsuario = auth()->user()->idUsuario; // Sesión
 
-    $listaEFTerminados = $constancia1->listaEventosTerminados($idUsuario);
+    $listaUsuarios = $constancia9->verUsuarios();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
-        $idEF = $_POST['idEF'];
+        if(isset($_POST['usuario'])){
+            $idUsuario = $_POST['usuario'];
+            $listaEFTerminados = $constancia1->listaEventosTerminados($idUsuario);
+            foreach ($listaEFTerminados as $key) {
+                echo $key['idEF'];
+            }
+        }
+        if(isset($_POST['idEF'])){
+            $idEF = $_POST['idEF'];
 
-        $bandera = true;
+            $bandera = true;
 
-        $autoeval = $constancia2->autoevaluacionRealizada($idEF, $idUsuario);
-        $autoeval = $autoeval[0];
+            $autoeval = $constancia2->autoevaluacionRealizada($idEF, $idUsuario);
+            $autoeval = $autoeval[0];
 
-        $calificado = $constancia3->participantesCalificados($idEF);
-        $calificado = $calificado[0];
+            $calificado = $constancia3->participantesCalificados($idEF);
+            $calificado = $calificado[0];
 
-        $evalprograma = $constancia4->evaluacionprogramaRealizada($idEF, $idUsuario);
-        $evalprograma = $evalprograma[0];
+            $evalprograma = $constancia4->evaluacionprogramaRealizada($idEF, $idUsuario);
+            $evalprograma = $evalprograma[0];
 
-        $evaldocente = $constancia5->evaluaciondocenteRealizada($idEF, $idUsuario);
-        $evaldocente = $evaldocente[0];
+            $evaldocente = $constancia5->evaluaciondocenteRealizada($idEF, $idUsuario);
+            $evaldocente = $evaldocente[0];
 
-        $aprobado = $constancia6->participanteAprobado($idEF, $idUsuario);
-        $aprobado = $aprobado[0];
+            $aprobado = $constancia6->participanteAprobado($idEF, $idUsuario);
+            $aprobado = $aprobado[0];
 
-        $usuario = $constancia7->selectUsuario($idUsuario);
-        $usuario = $usuario[0];
+            $usuario = $constancia7->selectUsuario($idUsuario);
+            $usuario = $usuario[0];
 
-        $EF = $constancia8->selectEF($idEF);
-        $EF = $EF[0];
+            $EF = $constancia8->selectEF($idEF);
+            $EF = $EF[0];
 
-        switch ($EF['mesInicio']) {
-            case 1:
+            switch ($EF['mesInicio']) {
+                case 1:
                 $mesInicio = 'Enero';
                 break;
-            case 2:
+                case 2:
                 $mesInicio = 'Febrero';
                 break;
-            case 3:
+                case 3:
                 $mesInicio = "Marzo";
                 break;
-            case 4:
+                case 4:
                 $mesInicio = "Abril";
                 break;
-            case 5:
+                case 5:
                 $mesInicio = "Mayo";
                 break;
-            case 6:
+                case 6:
                 $mesInicio = "Junio";
                 break;
-            case 7:
+                case 7:
                 $mesInicio = "Julio";
                 break;
-            case 8:
+                case 8:
                 $mesInicio = "Agosto";
                 break;
-            case 9:
+                case 9:
                 $mesInicio = "Septiembre";
                 break;
-            case 10:
+                case 10:
                 $mesInicio = "Octubre";
                 break;
-            case 11:
+                case 11:
                 $mesInicio = "Noviembre";
                 break;
-            case 12:
+                case 12:
                 $mesInicio = "Diciembre";
                 break;
-        }
+            }
 
-        switch ($EF['mesFinal']) {
-            case 1:
+            switch ($EF['mesFinal']) {
+                case 1:
                 $mesFinal = 'Enero';
                 break;
-            case 2:
+                case 2:
                 $mesFinal = 'Febrero';
                 break;
-            case 3:
+                case 3:
                 $mesFinal = "Marzo";
                 break;
-            case 4:
+                case 4:
                 $mesFinal = "Abril";
                 break;
-            case 5:
+                case 5:
                 $mesFinal = "Mayo";
                 break;
-            case 6:
+                case 6:
                 $mesFinal = "Junio";
                 break;
-            case 7:
+                case 7:
                 $mesFinal = "Julio";
                 break;
-            case 8:
+                case 8:
                 $mesFinal = "Agosto";
                 break;
-            case 9:
+                case 9:
                 $mesFinal = "Septiembre";
                 break;
-            case 10:
+                case 10:
                 $mesFinal = "Octubre";
                 break;
-            case 11:
+                case 11:
                 $mesFinal = "Noviembre";
                 break;
-            case 12:
+                case 12:
                 $mesFinal = "Diciembre";
                 break;
+            }
         }
-    } else {
-        $idEF = '';
     }
-
 ?>
 <title>Tus Constancias</title>
 
@@ -146,7 +160,7 @@
                 </thead>
                 <tbody class="opciones">
                 <?php
-                    if($listaEFTerminados != null){
+                    if(isset($listaEFTerminados) && $listaEFTerminados != null){
                         foreach($listaEFTerminados as $elemento){
                             echo "<tr>";
                             echo "<td>" . $elemento['nombreEF'] . "</td>";
@@ -163,13 +177,13 @@
             </table>
         </div>
         <div class="botoncito">
-            <button type="submit" name="boton" <?php echo $listaEFTerminados != null?'':'disabled';?>>Ver Constancia</button>
+            <button type="submit" name="boton" <?php echo isset($listaEFTerminados) && $listaEFTerminados != null?'':'disabled';?>>Ver Constancia</button>
         </div>
     </form>
 </div>
 <div class="cuadroconst">
     <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($EF)){
             if($autoeval['autoeval'] == 0){
                 if($bandera == true) echo "<span style='font-size:20px'>Seleccionaste el Evento Formativo: <span style='font-weight:bold'>" . $EF['nombreEF'] . "</span></span>";
                 echo "<div class='alerta'>";

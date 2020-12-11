@@ -18,7 +18,7 @@
                 <div class="form-group row">
                     <label for="apellidoUsuario" class="col-md-4 col-form-label text-md-right">{{ __('Apellido') }}</label>
                     <div class="col-md-6">
-                        <input id="apellidoUsuario" type="text" class="form-control" name="apellidoUsuario" value="{{$usuario->apellidoUsuario}}" required>
+                        <input id="apellidoUsuario" type="text" class="form-control" name="apellidoUsuario" value="{{$usuario->apellidoUsuario}}">
                         {!! $errors->first('nombre','<span class="help-block" style="color:red;">:message</span>')!!}
                     </div>
                 </div>

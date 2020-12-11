@@ -11,14 +11,14 @@
 
               <div class="form-group" {{ $errors->has('nombreEvento') ? 'has-error' : ''}}>
                 <label for="exampleInputEmail1">Nombre del evento formativo</label>
-                <input type="text" class="form-control" required  name='nombreEvento' placeholder="Nombre del evento">
+                <input type="text" class="form-control" required  name='nombreEvento' placeholder="ej. Introducción a Laravel">
                 {!! $errors->first('nombreEvento','<span class="help-block" style="color:red;">:message</span>')!!}
               </div>
 
-            
+
               <div class="form-group " {{ $errors->has('descripcionEvento') ? 'has-error' : ''}}>
                 <label for="exampleInputPassword1">Descripción del contenido del curso</label>
-                <textarea rows="4" class='form-control' cols="50"  required name='descripcionEvento' placeholder = "Descripción del contenido del curso" ></textarea>
+                <textarea rows="4" class='form-control' cols="50"  required name='descripcionEvento' placeholder = "Breve descripción para dar a conocer tu Evento Formativo" ></textarea>
                 {!! $errors->first('descripcionEvento','<span class="help-block" style="color:red;">:message</span>')!!}
               </div>
 
@@ -30,7 +30,7 @@
                                 @foreach ($errors->all() as $error)
                                     {{$error}}
                                 @endforeach
-                            </div> 
+                            </div>
                         @endif
               <div class="form-group " {{ $errors->has('fechaInicio') ? 'has-error' : ''}}>
                 <label for="exampleInputPassword1">Fecha de inicio</label>
@@ -46,11 +46,11 @@
 
               <div class="form-group" {{ $errors->has('modalidadEvento') ? 'has-error' : ''}}>
                 <label for="exampleInputEmail1">Modalidad</label>
-                <input type="text" class="form-control" required name='modalidadEvento' placeholder="Modalidad">
+                <input type="text" class="form-control" required name='modalidadEvento' placeholder="Presencial, Virtual o Hibrida">
                 {!! $errors->first('modalidadEvento','<span class="help-block" style="color:red;">:message</span>')!!}
               </div>
 
-            
+
 
               {{-- @if($instructor->count() > 0) --}}
                   <div class="form-group" id="result_panel" {{ $errors->has('diseñoInstruccional') ? 'has-error' : ''}}>
@@ -59,8 +59,10 @@
                       <div class="panel-body">
                           <select class="form-control" name="instructorID" id="card_type" required>
                               <option id="card_id" value="">Sin asignar</option>
-                              @foreach ($instructor as $instructores)
-                                  <option id="card_id"  value="{{$instructores->idInstructor}}">{{$instructores->idInstructor}}</option>
+                              @foreach ($usuarios as $instructores)
+                                  @if ($instructores->esInstructor == 1)
+                                      <option id="card_id"  value="{{$instructores->idUsuario}}">{{$instructores->nombreUsuario}} {{$instructores->apellidoUsuario}}</option>
+                                  @endif
                               @endforeach
                           </select>
                           {!! $errors->first('instructorID','<span class="help-block" style="color:red;">:message</span>')!!}
@@ -122,11 +124,11 @@
 
               <div class="form-group " {{ $errors->has('cuotaEvento') ? 'has-error' : ''}}>
                 <label for="exampleInputPassword1">Cuota para inscribirse al evento</label>
-                <input type="int" class='form-control'  required name='cuotaEvento'></textarea>
+                <input type="int" class='form-control' name='cuotaEvento' placeholder="ej. 150, 0, 50" required></textarea>
                 {!! $errors->first('cuotaEvento','<span class="help-block" style="color:red;">:message</span>')!!}
               </div>
 
-              
+
 
               <button type="submit" class="btn pretty-btn" style="float: left; background-color:green; color:white">Crear evento</button>
             </form>

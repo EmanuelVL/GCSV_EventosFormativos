@@ -1,6 +1,13 @@
+<?php
+    if(!(auth()->user())){
+        header('Location: http://sistemaeventosformativos.test/');
+        die();
+    }
+?>
+
 <!DOCTYPE html>
 @extends('layout.layout')
-@section('content')  
+@section('content')
 
 <title> Inicio </title>
     <div class="container">
@@ -12,13 +19,13 @@
                     <div class="card-header border-0">
                 <h3 class="card-title">Eventos formativos proximos</h3>
                 <div class="card-tools">
-                  
+
                 </div>
               </div>
-               
+
                     <!-- Page Heading -->
                     @foreach ($evento->sortBy('fechaInicio') as $eventos)
-                       
+
 
                             <div class="card card-primary card-outline" style="text-align: center; opacity:1;">
                       <div class="card-header">
@@ -33,24 +40,24 @@
                         <a href="" class="btn btn-primary">Inscribirse</a>
                       </div>
                     </div>
-                                
-                              
-                    @endforeach 
 
-                          
-                    
-                    
+
+                    @endforeach
+
+
+
+
 
                                       <div class="card card-primary card-outline" style="text-align: center; opacity:1;">
-                      
-                      
+
+
                     </div>
-                          
-                         
 
 
-                  
-                    
+
+
+
+
                     <!-- /.row -->
 
 
