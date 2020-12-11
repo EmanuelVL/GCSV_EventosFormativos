@@ -65,7 +65,7 @@ class ControladorEventosFormativos extends Controller
     {
         if( $request->input('fechaInicio') > $request->input('fechaFinal')){
             //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
-            return back()->withInput(request(['fechaInicio']));
+            return back()->withErrors(['email'=> 'La fechea de inicio es mayor a la fecha final!']);
             
         }
        
@@ -163,7 +163,7 @@ class ControladorEventosFormativos extends Controller
     {
         if( $request->input('fechaInicio') > $request->input('fechaFinal')){
             //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
-            return back()->withInput(request(['fechaInicio']));
+            return back()->withErrors(['email'=> 'La fechea de inicio es mayor a la fecha final!']);
             
         }
        
