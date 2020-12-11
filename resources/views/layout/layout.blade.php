@@ -83,7 +83,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="/adminlte/img/user.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="login/" class="d-block"> Iniciar sesión  </a>
+        @if (!auth()->user())
+          <a href="/login" class="d-block"> Iniciar sesión  </a>
+        @endif
+        @if (auth()->user())
+           <a href="/login" class="d-block"> {{auth()->user()->nombreUsuario}}  </a>
+        @endif
         </div>
       </div>
 
@@ -111,7 +116,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <br>
 
                <li class="nav-item">
-              <form action="" method="POST" >
+              <form action="{{ route('logout') }}" method="POST" >
                         @csrf
                         <button class="dropdown-item" style="color:white !important;">Cerrar sesión</button>
                     </form>
