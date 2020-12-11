@@ -38,7 +38,7 @@ class ControladorModulos extends Controller
             $evento = EventoFormativo::where('idEF', $modulo ->idEF)->firstOrFail();
             $evento->duracion = $evento->duracion + $modulo ->duracionModulo;
             $modulo ->save();
-        
+            $evento->update();
             
             
 
@@ -61,6 +61,7 @@ class ControladorModulos extends Controller
         $evento = EventoFormativo::where('idEF', $modulo ->idEF)->firstOrFail();
         $evento->duracion = $evento->duracion - $modulo ->duracionModulo;
         $modulo-> delete();
+        $evento->update();
         return back();
     }
 
@@ -86,7 +87,7 @@ class ControladorModulos extends Controller
             $modulo ->contenidoModulo = $request->input('contenidoModulo');
             $modulo ->duracionModulo = $request->input('duracion');
             $modulo->save();
-            
+            $evento->update();
           
             return redirect()->route('modulos.show',$modulo->idEF);
         
