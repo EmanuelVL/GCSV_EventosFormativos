@@ -43,7 +43,7 @@ class ControladorUsuarios extends Controller
         $usuario->nombreUsuario = $request->input('nombreUsuario');
         $usuario->apellidoUsuario = $request->input('apellidoUsuario');
         $usuario->correo = $request->input('correo');
-        $usuario->password = $request->input('password');
+        $usuario->password = bcrypt(request('password'));
         $usuario->esInstancia = $request->input('esInstancia');
         $usuario->esInstructor = $request->input('esInstructor');
         $usuario->esAdmin = $request->input('esAdmin');
