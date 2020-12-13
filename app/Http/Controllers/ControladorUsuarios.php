@@ -48,6 +48,14 @@ class ControladorUsuarios extends Controller
         $usuario->esInstructor = $request->input('esInstructor');
         $usuario->esAdmin = $request->input('esAdmin');
 
+        $usuarios = Usuario::all();
+
+        foreach($usuarios as $user){
+            if($user->correo == $usuario->correo){
+                return back()->withErrors(['Usted ya está registrado ', 'The Message']);
+            }
+        }
+
         /*
         $password_confirm = $request->input('password_confirm');
 
@@ -140,7 +148,7 @@ class ControladorUsuarios extends Controller
         $usuario->nombreUsuario = $request->nombreUsuario;
         $usuario->apellidoUsuario = $request->apellidoUsuario;
         $usuario->correo = $request->correo;
-        $usuario->password = bcrypt($request->password);
+        $usuario->password = bcrypt(request('password'));
 
         if($request->esAdmin != 1){
             $usuario->esAdmin = 0;

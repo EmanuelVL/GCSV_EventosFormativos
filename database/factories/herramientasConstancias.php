@@ -13,8 +13,8 @@
         }
 
         // Se evaluaron a los participantes?
-        public function participantesCalificados($idEF){
-            $resultado = $this->conexion_db->query("SELECT * FROM eventoformativo WHERE eventoformativo.idEF = $idEF");
+        public function participantesCalificados($idUsuario){
+            $resultado = $this->conexion_db->query("SELECT calificacion FROM detalleeventoparticipante WHERE detalleeventoparticipante.idUsuario = $idUsuario");
             return $resultado->fetch_all(MYSQLI_ASSOC);
         }
 
@@ -51,6 +51,12 @@
         // SELECT con datos de un Evento Formativo
         public function selectEF($idEF){
             $resultado = $this->conexion_db->query("CALL selectEF($idEF)");
+            return $resultado->fetch_all(MYSQLI_ASSOC);
+        }
+
+        // SELECT usuarios
+        public function verUsuarios(){
+            $resultado = $this->conexion_db->query("SELECT * FROM usuario");
             return $resultado->fetch_all(MYSQLI_ASSOC);
         }
     }

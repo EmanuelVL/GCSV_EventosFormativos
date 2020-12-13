@@ -13,16 +13,16 @@ use App\Modulo;
 
 class ControladorEventosFormativos extends Controller
 {
-    
+
     /**
      * Funcion que se encarga de desplegar 5 categorias y despues paginarlas en la vista listaCategorias.
      * @return vista con todas las categorias.
      *
      */
     public function index()
-    {   
+    {
         $eventof= EventoFormativo::all();
-        
+
         return view('eventos.eventos')->with(['EventoFormativo'=>$eventof]);
     }
 
@@ -66,15 +66,15 @@ class ControladorEventosFormativos extends Controller
         if( $request->input('fechaInicio') > $request->input('fechaFinal')){
             //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
             return back()->withErrors(['email'=> 'La fechea de inicio es mayor a la fecha final!']);
-            
+
         }
-       
-          
-          
-           
-        
+
+
+
+
+
         $credentials=1;
-   
+
         if($credentials){
             $eventoFormativo = new EventoFormativo();
             $eventoFormativo ->nombreEF = $request->input('nombreEvento');
@@ -85,7 +85,7 @@ class ControladorEventosFormativos extends Controller
             $eventoFormativo ->idTipo = $request->input('tipoEvento');
             $eventoFormativo ->idInstructor = $request->input('instructorID');
             $idIns = $request->input('instructorID');
-            $instructor= Instructor::where('idInstructor', $idIns)->firstOrFail();
+            $instructor = Instructor::where('idInstructor', $idIns)->firstOrFail();
             $eventoFormativo ->idInstancia = $instructor->idUsuario;
             $eventoFormativo ->diseñoInstruccional = $request->input('diseñoInstruccional');
             $eventoFormativo ->utilidadOportunidad = $request-> input('utilidadOpurtunidad');
@@ -94,11 +94,11 @@ class ControladorEventosFormativos extends Controller
             $eventoFormativo ->condicionesOperativas = $request->input('condicionesOperativas');
             $eventoFormativo ->cuota = $request->input('cuotaEvento');
             $eventoFormativo ->duracion = 0;
-            
+
             $eventoFormativo ->save();
-        
+
             return redirect()->route('gestioneventos.index');
-        
+
     }else{
    //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
         return back()->withInput(request(['nombrePlan']));
@@ -140,16 +140,16 @@ class ControladorEventosFormativos extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($idEF)
-    {   
+    {
 
         $evento = EventoFormativo::where('idEF', $idEF)->firstOrFail();
         $usuarios = Usuario::all();
         $instructor = Instructor::all();
         $tipoEvento = tipoEvento::all();
         //checa si la categoria tiene un academico o no
-        
+
         return view('eventos.modificarEvento',compact('evento','usuarios','instructor','tipoEvento'));
-       
+
     }
 
     /**
@@ -164,9 +164,9 @@ class ControladorEventosFormativos extends Controller
         if( $request->input('fechaInicio') > $request->input('fechaFinal')){
             //Si es falso, se regresa a la misma pagina de registro con los errores que hubo.
             return back()->withErrors(['email'=> 'La fechea de inicio es mayor a la fecha final!']);
-            
+
         }
-       
+
 
             $eventoFormativo = EventoFormativo::where('idEF', $idEF)->firstOrFail();
             $eventoFormativo ->nombreEF = $request->input('nombreEvento');
@@ -186,20 +186,20 @@ class ControladorEventosFormativos extends Controller
             $eventoFormativo ->condicionesOperativas = $request->input('condicionesOperativas');
             $eventoFormativo ->cuota = $request->input('cuotaEvento');
             $eventoFormativo ->duracion = $eventoFormativo ->duracion;
-            
+
             $eventoFormativo ->save();
             return redirect()->route('gestioneventos.index');
-        
-       
-      
+
+
+
     }
 
-   
+
     public function agregarModulo(){
 
         return view('eventos.agregarModulos',compact('evento','usuarios','instructor','tipoEvento'));
     }
 
 
-  
+
 }

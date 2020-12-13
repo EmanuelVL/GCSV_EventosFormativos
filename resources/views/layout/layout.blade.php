@@ -57,6 +57,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <li class="nav-item d-none d-sm-inline-block">
         <a href="/evaluaciones" class="nav-link">Evaluaciones</a>
       </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="/constancias" class="nav-link">Mis constancias</a>
+      </li>
     </ul>
 
     <!-- SEARCH FORM -->
@@ -108,14 +111,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <li class="nav-item ">
 
-
+              @if(auth()->user()->esAdmin == 1)
               <li class="nav-item">
                 <a href="/gestionusuarios" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Usuarios</p>
                 </a>
               </li>
-
+              @endif
 
 
 
@@ -128,7 +131,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <button class="dropdown-item" style="color:white !important;">Cerrar sesión</button>
                     </form>
                       </li>
-
           </li>
 
         </ul>
@@ -162,14 +164,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-      Anything you want
-    </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; Doriclub 2019 <a href="http://doriclub.ml">Doriclub.ml</a>.</strong> All rights reserved.
-  </footer>
+  
 </div>
 <!-- ./wrapper -->
 

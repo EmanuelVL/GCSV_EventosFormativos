@@ -38,29 +38,29 @@
                 <tr>
 
                     <td>
-                       
+
                                 <a style="color:blue !important;" href="{{route('gestioneventos.show',$evento->idEF)}}">{{$evento->nombreEF}}</a>
                                  </a>
-                               
+
                     </td>
                 <td style="height:10px;"><p class="descripcion-texto">{{$evento->descripcion}}</p></td>
                 <td>
-                       
+
                                 <a style="color:blue !important;" >{{$evento->fechaInicio}}</a>
                                  </a>
-                               
+
                 </td>
                     <td style="width:150px">
                         <div class="d-flex">
 
                             <div class="col-lg-8 col-md-8 flex-fill">
                                 <center>
-                                
+
                                     <a type="button" style="color:white ;" class="btn btn-info btn-sm" href="{{route('gestioneventos.show',$evento->idEF)}}">
 
                                         Ver evento
                                     </a>
-                               
+
                                 </center>
                             </div>
 

@@ -6,6 +6,9 @@
 
 <title>Agregar Módulo</title>
 
+<a type="button" style="color:black ;" class="btn btn-info btn-sm" href="{{route('gestioneventos.index')}}">
+     Regresar
+</a>
 <div class="titulo">
     <h1>Agregar Módulo</h1>
 </div>
@@ -13,7 +16,7 @@
          @csrf
 <div class="caja">
     <div class="formularioModulo">
-            
+
             <input type='hidden' value="{{$_REQUEST['rec_id']}}" name='evento_id'/>
             <label for="nombreModulo">Nombre del módulo:</label><br>
             <input type="text" id="nombreModulo" name="nombreModulo" class="entrada" required>

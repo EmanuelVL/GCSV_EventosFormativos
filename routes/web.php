@@ -70,3 +70,5 @@ Route::get('modulos', function () {
 });
 
 Route::get('/agregarModulo', 'ControladorEventosFormativos@agregarModulo')->name('gestioneventos.agregarModulo');
+
+Route::resource('inscripcion','ControladorInscripciones')->middleware('auth');

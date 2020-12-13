@@ -22,20 +22,15 @@
     $constancia6 = new Constancia();
     $constancia7 = new Constancia();
     $constancia8 = new Constancia();
-    $constancia9 = new Constancia();
+    //$constancia9 = new Constancia();
 
     $idUsuario = auth()->user()->idUsuario; // Sesión
 
-    $listaUsuarios = $constancia9->verUsuarios();
+    //$listaUsuarios = $constancia9->verUsuarios();
+
+    $listaEFTerminados = $constancia1->listaEventosTerminados($idUsuario);
 
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
-        if(isset($_POST['usuario'])){
-            $idUsuario = $_POST['usuario'];
-            $listaEFTerminados = $constancia1->listaEventosTerminados($idUsuario);
-            foreach ($listaEFTerminados as $key) {
-                echo $key['idEF'];
-            }
-        }
         if(isset($_POST['idEF'])){
             $idEF = $_POST['idEF'];
 
@@ -44,7 +39,7 @@
             $autoeval = $constancia2->autoevaluacionRealizada($idEF, $idUsuario);
             $autoeval = $autoeval[0];
 
-            $calificado = $constancia3->participantesCalificados($idEF);
+            $calificado = $constancia3->participantesCalificados($idUsuario);
             $calificado = $calificado[0];
 
             $evalprograma = $constancia4->evaluacionprogramaRealizada($idEF, $idUsuario);
@@ -160,11 +155,11 @@
                 </thead>
                 <tbody class="opciones">
                 <?php
-                    if(isset($listaEFTerminados) && $listaEFTerminados != null){
+                    if($listaEFTerminados != null){
                         foreach($listaEFTerminados as $elemento){
                             echo "<tr>";
                             echo "<td>" . $elemento['nombreEF'] . "</td>";
-                            echo "<td><input type='radio' id='seleccion' name='idEF' value=" . $elemento['idEF'] . " required ". (($idEF == $elemento['idEF'])?'checked': '') . "></td>";
+                            echo "<td><input type='radio' id='seleccion' name='idEF' value=" . $elemento['idEF'] . " required></td>";
                             echo "</tr>";
                         }
                     } else {
@@ -205,7 +200,7 @@
                 echo "</div>";
                 $bandera = false;
             }
-            if($calificado['evalParticipantes'] == 0){
+            if($calificado['calificacion'] == 0){
                 if($bandera == true) echo "<span style='font-size:20px'>Seleccionaste el Evento Formativo: <span style='font-weight:bold'>" . $EF['nombreEF'] . "</span></span>";
                 echo "<div class='alerta'style='background-color:#ff8000'>";
                 echo "El instructor no te ha evaluado.";

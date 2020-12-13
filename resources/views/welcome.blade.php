@@ -40,9 +40,9 @@
                       <div class="card-body">
                         <p class="card-text"></p>
                         <a href="{{route('gestioneventos.show',$eventos->idEF)}}" class="btn btn-primary">Ver más</a>
-                        <a href="" class="btn btn-primary">Inscribirse</a>
+                        <a href="{{route('inscripcion.show',$eventos->idEF)}}" class="btn btn-primary">Inscribirse</a>
                       </div>
-                    </div>
+                    </div>  
 
 
                     @endforeach

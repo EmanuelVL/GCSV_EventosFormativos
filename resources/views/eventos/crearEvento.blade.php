@@ -2,6 +2,9 @@
 
 @section('content')
    <!-- Page Content -->
+   <a type="button" style="color:black ;" class="btn btn-info btn-sm" href="{{route('gestioneventos.index')}}">
+        Regresar
+   </a>
    <title> Crear evento </title>
   <div class="container ">
               <div class="card-body p-5">
@@ -59,10 +62,12 @@
                       <div class="panel-body">
                           <select class="form-control" name="instructorID" id="card_type" required>
                               <option id="card_id" value="">Sin asignar</option>
-                              @foreach ($usuarios as $instructores)
-                                  @if ($instructores->esInstructor == 1)
-                                      <option id="card_id"  value="{{$instructores->idUsuario}}">{{$instructores->nombreUsuario}} {{$instructores->apellidoUsuario}}</option>
-                                  @endif
+                              @foreach ($instructor as $instructores)
+                                  @foreach ($usuarios as $usuario)
+                                      @if($usuario->idUsuario == $instructores->idUsuario)
+                                          <option id="card_id"  value="{{$instructores->idInstructor}}">{{$usuario->nombreUsuario}} {{$usuario->apellidoUsuario}}</option>
+                                      @endif
+                                  @endforeach
                               @endforeach
                           </select>
                           {!! $errors->first('instructorID','<span class="help-block" style="color:red;">:message</span>')!!}

@@ -5,7 +5,7 @@
 <link href="{{ URL::asset('/css/modulos.css') }}" rel="stylesheet">
 
 <?php
-    require ('C:\laragon\www\SistemaEventosFormativos\public\ControladorModulos.php');
+    require ('C:\laragon\www\SistemaEventosFormativos\public\ControllerModulos.php');
 
     $modulo = new Modulo();
 
@@ -25,6 +25,8 @@
                     <th>Nombre</th>
                     <th>Contenido</th>
                     <th>Duración (hrs)</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody class="tablebody">
@@ -35,11 +37,13 @@
                             echo "<td>" . $elemento['nombreModulo'] . "</td>";
                             echo "<td>" . $elemento['contenidoModulo'] . "</td>";
                             echo "<td>" . $elemento['duracionModulo'] . "</td>";
+                            echo '<td><a title="Editar" href="contClientes.php?op=del&id='.$elemento['idModulo'].'"><i class="fas fa-pencil-alt tm-nav-icon"></i></a></td>';
+                            echo '<td><a title="Eliminar" href="contClientes.php?op=del&id='.$elemento['idModulo'].'"><i class="fas fa-trash-alt tm-nav-icon"></i></a></td>';
                             echo "</tr>";
                         }
                     } else {
                         echo "<tr>";
-                        echo "<td colspan=3>No existe ningún módulo todavía.</td>";
+                        echo "<td colspan=5>No existe ningún módulo todavía.</td>";
                         echo "</tr>";
                     }
                 ?>

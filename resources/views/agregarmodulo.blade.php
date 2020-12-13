@@ -11,7 +11,7 @@
 </div>
 <div class="caja">
     <div class="formularioModulo">
-        <form method="POST" action="{{ URL::asset('ControladorModulos.php') }}">
+        <form method="POST" action="{{ URL::asset('ControllerModulos.php') }}">
             @csrf
 
             <label for="nombreModulo">Nombre del módulo:</label><br>

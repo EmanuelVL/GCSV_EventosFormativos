@@ -2,6 +2,9 @@
 @extends('layout.layout')
 @section('content')
      <!-- Page Content -->
+ <a type="button" style="color:black ;" class="btn btn-info btn-sm" href="{{route('gestioneventos.index')}}">
+      Regresar
+ </a>
   <title> Editar {{$evento->nombreEF}} </title>
   <div class="container background-style">
     <div class="card border-0 shadow my-5">
@@ -17,7 +20,7 @@
                   {!! $errors->first('nombreEvento','<span class="help-block" style="color:red;">:message</span>')!!}
                 </div>
                 <br>
-                  
+
               <div class="form-group " {{ $errors->has('descripcionEvento') ? 'has-error' : ''}}>
                 <label for="exampleInputPassword1">Descripción del contenido del curso</label>
                 <textarea rows="4" class='form-control' cols="50" required name='descripcionEvento'  >{{$evento->descripcion}}</textarea>
@@ -31,7 +34,7 @@
                                 @foreach ($errors->all() as $error)
                                     {{$error}}
                                 @endforeach
-                            </div> 
+                            </div>
                         @endif
 
                 <div class="form-group" {{ $errors->has('fechaInicio') ? 'has-error' : ''}}>
@@ -39,7 +42,7 @@
                   <input type ="date" class="form-control" name='fechaInicio' required value="{{$evento->fechaInicio}}">
                   {!! $errors->first('fechaInicio','<span class="help-block" style="color:red;">:message</span>')!!}
                 </div>
-           
+
 
               <div class="form-group " {{ $errors->has('fechaFinal') ? 'has-error' : ''}}>
                 <label for="exampleInputPassword1">Fecha final</label>
@@ -53,7 +56,7 @@
                 {!! $errors->first('modalidadEvento','<span class="help-block" style="color:red;">:message</span>')!!}
               </div>
 
-            
+
 
               {{-- @if($instructor->count() > 0) --}}
                   <div class="form-group" id="result_panel" {{ $errors->has('diseñoInstruccional') ? 'has-error' : ''}}>
@@ -129,11 +132,11 @@
                 {!! $errors->first('cuotaEvento','<span class="help-block" style="color:red;">:message</span>')!!}
               </div>
 
-            
-                
-                     
 
-                       
+
+
+
+
                 <br>
                 <button type="submit" style=" border-color: black; color:white; position:relative;top:10px"
                    class="btn btn-info ">

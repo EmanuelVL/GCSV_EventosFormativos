@@ -26,7 +26,7 @@
         }
 
         .card-signin .card-img-left {
-        
+
         /* Link to your background image using in the property below! */
         background: scroll center url('/Imagenes/logo_lcc.jpg');
         background-size: 100%;
@@ -117,7 +117,7 @@
             <div class="col-lg-10 col-xl-9 mx-auto">
                 <div class="card card-signin flex-row my-5">
                     <div class="card-img-left d-none d-md-flex">
-                        
+
                     </div>
                     <div class="card-body">
                         <h5 class="card-title text-center">{{ __('Regístrate') }}</h5>
@@ -129,30 +129,30 @@
                                 {!! $errors->first('nombre','<span class="help-block" style="color:red;">:message</span>')!!}
                             </div>
                             <div class="form-group form-label-group">
-                                <input type="text" class="form-control" {{ $errors->has('apellido') ? 'has-error' : ''}} placeholder="Apellido" id="inputApellido"  name="apellido" value="{{ old('apellido') }}" required>
+                                <input type="text" class="form-control" {{ $errors->has('apellido') ? 'has-error' : ''}} placeholder="Apellido" id="inputApellido"  name="apellido" value="{{ old('apellido') }}">
                                 <label for="inputApellido">{{ __('Apellido') }}</label>
                                 {!! $errors->first('apellido','<span class="help-block" style="color:red;">:message</span>')!!}
                             </div>
-                
+
                             <div class="form-label-group">
                                 <input type="email" class="form-control" {{ $errors->has('email') ? 'has-error' : ''}} placeholder="Email address" id="inputEmail" name="email" value="{{ old('email') }}" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                                 <label for="inputEmail">{{ __('Correo electrónico') }}</label>
                                 {!! $errors->first('email','<span class="help-block" style="color:red;">:message</span>')!!}
                             </div>
-                            
+
                             <hr>
-                
+
                             <div class="form-label-group">
                                 <input type="password" placeholder="Password" id="inputPassword" class="form-control" {{ $errors->has('password') ? 'has-error' : ''}} name="password" required>
                                 <label for="inputPassword">{{ __('Contraseña') }}</label>
                                 {!! $errors->first('password','<span class="help-block" style="color:red;">:message</span>')!!}
                             </div>
-                            
+
                             <div class="form-label-group">
                                 <input type="password" class="form-control" placeholder="Password" id="inputConfirmPassword"  name="password_confirmation" required>
                                 <label for="inputConfirmPassword">{{ __('Confirmar Contraseña') }}</label>
                             </div>
-                
+
                             <button class="btn btn-lg btn-primary btn-block" type="submit">{{ __('Regístrate') }}</button>
                                 <a class="d-block text-center mt-2 small" href="{{route('login')}}">Ingresar</a>
 

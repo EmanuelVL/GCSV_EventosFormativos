@@ -12,6 +12,9 @@
 <title>Administrar modulos</title>
      <!-- Page Content -->
 
+ <a type="button" style="color:black ;" class="btn btn-info btn-sm" href="{{route('gestioneventos.show',$evento->idEF)}}">
+                                    Regresar
+ </a>
 
 <div class="card" align="center">
               <div class="card-header border-0">
@@ -38,22 +41,22 @@
                 <tr>
 
                     <td>
-                       
+
                                 <a style="color:blue !important;" href="{{route('gestioneventos.show',$evento->idEF)}}">{{$modulo->nombreModulo}}</a>
-                              
-                               
+
+
                     </td>
                 <td style="height:10px;"><p class="descripcion-texto">{{$modulo->contenidoModulo}}</p></td>
                 <td>
-                       
+
                                 <a style="color:blue !important;" >{{$modulo->duracionModulo}} horas</a>
                                  </a>
-                               
+
                 </td>
                     <td style="width:150px">
                         <div class="d-flex">
 
-                            
+
 
                             <div class="col-lg-6 col-md-6 flex-fill">
                                 <form style="margin: 0px;" action="{{route('modulos.destroy',$modulo->idModulo)}}"  method="POST">
@@ -97,7 +100,7 @@
                                             <input type='hidden' value='{{$idEF}}' name='rec_id'/><br>
                                             <input type='submit' class="btn btn-info btn-sm" value='Agregar modulo'/>
                                         </form>
-        
+
             </div>
             <br>
             </div>

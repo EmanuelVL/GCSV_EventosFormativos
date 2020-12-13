@@ -5,7 +5,9 @@
 <link href="{{ URL::asset('/css/agregarmodulo.css') }}" rel="stylesheet">
 
 <title>Agregar Módulo</title>
-
+<a type="button" style="color:black ;" class="btn btn-info btn-sm" href="{{route('gestioneventos.index')}}">
+     Regresar
+</a>
 <div class="titulo">
     <h1>Modificar Módulo</h1>
 </div>
@@ -14,8 +16,8 @@
          @method("put")
 <div class="caja">
     <div class="formularioModulo">
-            
-        
+
+
             <label for="nombreModulo">Nombre del módulo:</label><br>
             <input type="text" id="nombreModulo" name="nombreModulo" value="{{$modulo->nombreModulo}}"class="entrada" required>
             <br><br>

@@ -9,6 +9,10 @@
         margin: auto;
     }
 </style>
+
+<a type="button" style="color:black ;" class="btn btn-info btn-sm" href="{{route('gestioneventos.index')}}">
+     Regresar
+</a>
 <title>Administrar eventos</title>
      <!-- Page Content -->
 
@@ -16,19 +20,19 @@
 <div class="card" align="center">
               <div class="card-header border-0">
                 <h5 class="card-title">  <i class="fas fa-globe"></i> Evento: {{$evento->nombreEF}} </h5>
-                
-               
 
-        
-              
+
+
+
+
               <div class="card-body table-responsive p-0">
-           
-               
-                
-                 
+
+
+
+
                 <br>
                 <div class="card-tools">
-                  
+
                   </div>
                 <div class="card card-primary card-outline" style="text-align: center; opacity:1;">
                   <tr>
@@ -37,25 +41,25 @@
                             <h5 class="m-0">Evento: {{$evento->nombreEF}} </h5>
                             <br>
                             <center>
-                                
+
                                 <a type="button" style="color:black ;" class="btn btn-info btn-sm" href="{{route('modulos.show',$evento->idEF)}}">
                                     Ver modulos del evento
                                 </a>
-                           
+
                           </center>
                         </div>
-                       
+
                     </th>
-                    
+
                   </tr>
-                 
+
                   <tr>
                     <th>
                     <div class="card-header">
                             <h5 class="m-0">Fecha de inicio: {{$evento->fechaInicio}} </h5>
                         </div>
                     </th>
-                   
+
 
                   </tr>
 
@@ -65,7 +69,7 @@
                             <h5 class="m-0">Fecha de fin: {{$evento->fechaFinal}} </h5>
                         </div>
                     </th>
-                   
+
 
                   </tr>
 
@@ -75,11 +79,11 @@
                             <h5 class="m-0">Modalidad: {{$evento->modalidad}} </h5>
                         </div>
                     </th>
-                   
+
 
                   </tr>
                   </div>
-                  
+
                   <tr>
                     <th>
                     <div class="card-header">
@@ -96,7 +100,7 @@
                             <h5 class="m-0">Diseño instruccional: {{$evento->diseñoInstruccional}} </h5>
                         </div>
                     </th>
-                   
+
 
                   </tr>
                   <tr>
@@ -105,7 +109,7 @@
                             <h5 class="m-0">Utilidad oportunidad: {{$evento->utilidadOportunidad}} </h5>
                         </div>
                     </th>
-                   
+
 
                   </tr>
                   <tr>
@@ -115,7 +119,7 @@
                         </div>
                         </th>
                   </tr>
-                  
+
                   <tr>
                     <th>
                         <div class="card-header">
@@ -161,18 +165,17 @@
                         </div>
                         </th>
                   </tr>
-                 
-            
+
+
 
             </div>
             <div class="card card-primary card-outline" style="text-align: center; opacity:1;">
-                      
-                      
+
+
                       </div>
-            
+
             </div>
 </div>
 
 
 @stop
-
